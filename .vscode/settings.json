@@ -1,6 +1,6 @@
 {
   // Apenas para gravar
-  "workbench.statusBar.visible": false,
+  "workbench.statusBar.visible": true,
   //"workbench.editor.showTabs": false,
   "workbench.editor.enablePreview": false,
   "editor.formatOnSave": false,
@@ -10,5 +10,10 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.tabCompletion": "on",
-  "diffEditor.codeLens": true
+  "diffEditor.codeLens": true,
+  "workbench.activityBar.location": "default",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.eol": "\n",
+  "workbench.panel.defaultLocation": "bottom"
+
 }

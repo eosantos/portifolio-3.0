@@ -1,12 +1,16 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Catamaran } from 'next/font/google';
 import { ThemeProvider } from '../providers/theme-provider';
 
-const inter = Inter({ subsets: ['latin'] });
+// Fonte com todos os pesos (100 a 900)
+const catamaran = Catamaran({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
+});
 
 export const metadata: Metadata = {
-  title: 'Eduardo - Portfólio',
+  title: 'Eduardo - Portfólio 3.0',
   description: 'Desenvolvedor Front-end'
 };
 
@@ -17,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={inter.className}>
+      <body className={catamaran.className}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

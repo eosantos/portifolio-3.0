@@ -28,7 +28,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ toggleTheme, isDark }}>
-      <StyledProvider theme={isDark ? darkTheme : lightTheme}>
+      <StyledProvider theme={isDark ? lightTheme : darkTheme}>
         <GlobalStyle />
         {children}
       </StyledProvider>

@@ -1,7 +1,7 @@
 'use client';
 
-import ImageWrapper from 'components/PerfilImage';
 import styled from 'styled-components';
+import ImageWrapper from '../../components/PerfilImage';
 import { media } from '../../styles/media';
 
 const Container = styled.section`

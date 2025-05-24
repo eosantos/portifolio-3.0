@@ -1,34 +1,62 @@
 'use client';
-
+import ImageWrapper from 'components/perfilImage';
 import styled from 'styled-components';
 
-export const Container = styled.section`
-  min-height: 100vh;
+const Container = styled.section`
+  padding: 4rem 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 4rem 2rem;
+  align-items: center;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    padding: 6rem 4rem;
+  }
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    text-align: left;
+    justify-content: space-around;
+  }
 `;
 
-export const Title = styled.h1`
-  font-size: 3rem;
-  font-weight: 700;
-`;
-
-export const Subtitle = styled.p`
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin-top: 1rem;
+const Content = styled.div`
   max-width: 600px;
+
+  h1 {
+    font-size: 2.4rem;
+
+    @media (min-width: 768px) {
+      font-size: 3.2rem;
+    }
+
+    @media (min-width: 1024px) {
+      font-size: 4rem;
+    }
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    line-height: 1.6;
+
+    @media (min-width: 768px) {
+      font-size: 1.4rem;
+    }
+  }
 `;
 
 export default function HomeSection() {
   return (
-    <Container id="home">
-      <Title>Olá, eu sou o Eduardo 👋</Title>
-      <Subtitle>
-        Desenvolvedor Front-End apaixonado por criar interfaces incríveis.
-      </Subtitle>
+    <Container>
+      <Content>
+        <h1>Olá, eu sou o Eduardo 👋</h1>
+        <p>
+          Desenvolvedor Front-end com foco em interfaces performáticas,
+          acessíveis e com ótimo design. Vamos criar algo incrível juntos?
+        </p>
+      </Content>
+      <ImageWrapper />
     </Container>
   );
 }

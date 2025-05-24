@@ -1,16 +1,17 @@
 'use client';
 
+import Home from 'sections/Home';
 import { useTheme } from '../providers/theme-provider';
 
-export default function Home() {
+export default function App() {
   const { toggleTheme, isDark } = useTheme();
 
   return (
     <main>
-      <h1>Olá, eu sou o Eduardo 👋</h1>
       <button onClick={toggleTheme}>
-        Mudar para modo {isDark ? 'claro' : 'escuro'}
+        Mudar para modo {isDark ? 'escuro' : 'claro'}
       </button>
+      <Home />
     </main>
   );
 }

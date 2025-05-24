@@ -1,5 +1,5 @@
 'use client';
-import ImageWrapper from 'components/perfilImage';
+import ImageWrapper from 'components/PerfilImage';
 import styled from 'styled-components';
 import { media } from '../../styles/media';
 

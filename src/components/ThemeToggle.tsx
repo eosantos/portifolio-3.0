@@ -1,5 +1,6 @@
 import { FiMoon, FiSun } from 'react-icons/fi';
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
+import { useTheme } from '../providers/theme-provider'; // importe o hook correto
 
 const ToggleButton = styled.button`
   background: none;
@@ -8,11 +9,18 @@ const ToggleButton = styled.button`
   color: ${({ theme }) => theme.text};
   cursor: pointer;
   flex-shrink: 0;
+
+  &:hover {
+    color: ${({ theme }) => theme.purple};
+  }
 `;
 
 export const ThemeToggle = () => {
-  const theme = useTheme();
-  const isDark = theme.text === 'dark';
+  const { toggleTheme, isDark } = useTheme();
 
-  return <ToggleButton>{isDark ? <FiSun /> : <FiMoon />}</ToggleButton>;
+  return (
+    <ToggleButton onClick={toggleTheme} aria-label="Toggle theme">
+      {isDark ? <FiSun /> : <FiMoon />}
+    </ToggleButton>
+  );
 };

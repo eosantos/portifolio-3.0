@@ -49,6 +49,7 @@ const CenterSection = styled.nav<{ $isOpen: boolean }>`
     flex-direction: column;
     padding: 1rem;
     display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
+    max-width: 75%;
   }
 `;
 

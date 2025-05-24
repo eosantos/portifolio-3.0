@@ -1,7 +1,7 @@
 // src/providers/theme-provider.tsx
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { ThemeProvider as StyledProvider } from 'styled-components';
 import { GlobalStyle } from '../styles/global';
 import { darkTheme, lightTheme } from '../styles/theme';
@@ -20,7 +20,18 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark') {
+      setIsDark(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }, [isDark]);
 
   function toggleTheme() {
     setIsDark((prev) => !prev);
@@ -28,7 +39,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ toggleTheme, isDark }}>
-      <StyledProvider theme={isDark ? lightTheme : darkTheme}>
+      <StyledProvider theme={isDark ? darkTheme : lightTheme}>
         <GlobalStyle />
         {children}
       </StyledProvider>

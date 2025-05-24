@@ -10,7 +10,7 @@ const catamaran = Catamaran({
 });
 
 export const metadata: Metadata = {
-  title: 'Eduardo - Portfólio 3.0',
+  title: 'Dudev',
   description: 'Desenvolvedor Front-end'
 };
 

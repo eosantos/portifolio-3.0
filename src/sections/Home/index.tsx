@@ -1,6 +1,7 @@
 'use client';
 import ImageWrapper from 'components/perfilImage';
 import styled from 'styled-components';
+import { media } from '../../styles/media';
 
 const Container = styled.section`
   padding: 4rem 2rem;
@@ -9,11 +10,11 @@ const Container = styled.section`
   align-items: center;
   text-align: center;
 
-  @media (min-width: 768px) {
+  ${media.greaterThan('md')} {
     padding: 6rem 4rem;
   }
 
-  @media (min-width: 1024px) {
+  ${media.greaterThan('lg')} {
     flex-direction: row;
     text-align: left;
     justify-content: space-around;
@@ -26,11 +27,11 @@ const Content = styled.div`
   h1 {
     font-size: 2.4rem;
 
-    @media (min-width: 768px) {
+    ${media.greaterThan('md')} {
       font-size: 3.2rem;
     }
 
-    @media (min-width: 1024px) {
+    ${media.greaterThan('lg')} {
       font-size: 4rem;
     }
   }
@@ -40,7 +41,7 @@ const Content = styled.div`
     margin-top: 1rem;
     line-height: 1.6;
 
-    @media (min-width: 768px) {
+    ${media.greaterThan('md')} {
       font-size: 1.4rem;
     }
   }

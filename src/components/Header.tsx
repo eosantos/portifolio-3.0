@@ -1,10 +1,10 @@
 'use client';
 
-import { media } from '@/styles/media';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import styled from 'styled-components';
+import { media } from '../styles/media';
 import { ThemeToggle } from './ThemeToggle';
 
 const HeaderContainer = styled.header`

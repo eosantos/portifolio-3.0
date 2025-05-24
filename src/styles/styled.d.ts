@@ -5,6 +5,16 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     background: string;
     text: string;
-    // adicione mais propriedades conforme necessário
+    currentline: string;
+    selection: string;
+    foreground: string;
+    comment: string;
+    can: string;
+    geen: string;
+    orange: string;
+    pink: string;
+    purple: string;
+    red: '#ff5555';
+    yellow: string;
   }
 }

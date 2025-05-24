@@ -9,14 +9,13 @@ const ImageWrapper = styled.div`
     width: 100%;
     max-width: 650px;
     border-radius: 12px;
+    background-color: ${({ theme }) => theme.background}; // opcional
 
-    /* até 1024 px (lg) a imagem fica menor */
     ${media.lessThan('lg')} {
       max-height: 350px;
     }
   }
 
-  /* em telas menores não precisa de margem extra */
   ${media.lessThan('lg')} {
     margin-top: 0;
   }

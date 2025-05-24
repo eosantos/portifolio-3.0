@@ -26,6 +26,7 @@ const Content = styled.div`
 
   h1 {
     font-size: 2.4rem;
+    color: ${({ theme }) => theme.text};
 
     ${media.greaterThan('md')} {
       font-size: 3.2rem;
@@ -40,6 +41,7 @@ const Content = styled.div`
     font-size: 1.2rem;
     margin-top: 1rem;
     line-height: 1.6;
+    color: ${({ theme }) => theme.text};
 
     ${media.greaterThan('md')} {
       font-size: 1.4rem;

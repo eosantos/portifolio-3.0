@@ -20,13 +20,12 @@ const HeaderContainer = styled.header`
   align-items: center;
 `;
 
-const Logo = styled.h1`
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: ${({ theme }) => theme.text};
+const LeftSection = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
-const Nav = styled.nav<{ $isOpen: boolean }>`
+const CenterSection = styled.nav<{ $isOpen: boolean }>`
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -53,6 +52,30 @@ const Nav = styled.nav<{ $isOpen: boolean }>`
   }
 `;
 
+const RightSection = styled.div`
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+  flex-shrink: 0;
+  margin-right: 5rem;
+
+  ${media.lessThan('md')} {
+    justify-content: flex-end;
+    width: auto;
+  }
+`;
+
+const Logo = styled.h1`
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.text};
+  text-decoration: none;
+
+  &:hover {
+    color: ${({ theme }) => theme.purple};
+  }
+`;
+
 const MobileMenuButton = styled.button`
   display: none;
   background: none;
@@ -70,18 +93,24 @@ export default function Header() {
 
   return (
     <HeaderContainer>
-      <Logo>Eduardo</Logo>
+      <LeftSection>
+        <Link href="/">
+          <Logo>Eduardo</Logo>
+        </Link>
+      </LeftSection>
 
-      <MobileMenuButton onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <FiX /> : <FiMenu />}
-      </MobileMenuButton>
-
-      <Nav $isOpen={isOpen}>
+      <CenterSection $isOpen={isOpen}>
         <Link href="#sobre">Sobre</Link>
         <Link href="#projetos">Projetos</Link>
         <Link href="#contato">Contato</Link>
+      </CenterSection>
+
+      <RightSection>
         <ThemeToggle />
-      </Nav>
+        <MobileMenuButton onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <FiX /> : <FiMenu />}
+        </MobileMenuButton>
+      </RightSection>
     </HeaderContainer>
   );
 }

@@ -1,27 +1,18 @@
-'use client';
-
 import { FiMoon, FiSun } from 'react-icons/fi';
-import styled from 'styled-components';
-import { useTheme } from '../providers/theme-provider';
+import styled, { useTheme } from 'styled-components';
 
-const Button = styled.button`
+const ToggleButton = styled.button`
   background: none;
   border: none;
   font-size: 1.5rem;
-  cursor: pointer;
   color: ${({ theme }) => theme.text};
-
-  &:hover {
-    color: ${({ theme }) => theme.purple};
-  }
+  cursor: pointer;
+  flex-shrink: 0;
 `;
 
-export function ThemeToggle() {
-  const { toggleTheme, isDark } = useTheme();
+export const ThemeToggle = () => {
+  const theme = useTheme();
+  const isDark = theme.text === 'dark';
 
-  return (
-    <Button onClick={toggleTheme} title="Alternar tema">
-      {isDark ? <FiSun /> : <FiMoon />}
-    </Button>
-  );
-}
+  return <ToggleButton>{isDark ? <FiSun /> : <FiMoon />}</ToggleButton>;
+};

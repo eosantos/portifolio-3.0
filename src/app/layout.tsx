@@ -1,9 +1,8 @@
-// src/app/layout.tsx
+import Header from 'components/Header';
 import type { Metadata } from 'next';
 import { Catamaran } from 'next/font/google';
 import { ThemeProvider } from '../providers/theme-provider';
 
-// Fonte com todos os pesos (100 a 900)
 const catamaran = Catamaran({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900']
@@ -22,7 +21,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={catamaran.className}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

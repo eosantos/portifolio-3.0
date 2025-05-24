@@ -8,11 +8,13 @@ const ImageWrapper = styled.div`
   img {
     width: 100%;
     max-width: 650px;
+    height: auto; /* mantém a proporção */
     border-radius: 12px;
-    background-color: ${({ theme }) => theme.background}; // opcional
+    background-color: ${({ theme }) => theme.background}; /* opcional */
 
     ${media.lessThan('lg')} {
       max-height: 350px;
+      width: auto; /* para manter proporção na media query */
     }
   }
 

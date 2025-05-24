@@ -26,7 +26,7 @@ const Logo = styled.h1`
   color: ${({ theme }) => theme.text};
 `;
 
-const Nav = styled.nav<{ isOpen: boolean }>`
+const Nav = styled.nav<{ $isOpen: boolean }>`
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -49,7 +49,7 @@ const Nav = styled.nav<{ isOpen: boolean }>`
     background-color: ${({ theme }) => theme.background};
     flex-direction: column;
     padding: 1rem;
-    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+    display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
   }
 `;
 
@@ -76,7 +76,7 @@ export default function Header() {
         {isOpen ? <FiX /> : <FiMenu />}
       </MobileMenuButton>
 
-      <Nav isOpen={isOpen}>
+      <Nav $isOpen={isOpen}>
         <Link href="#sobre">Sobre</Link>
         <Link href="#projetos">Projetos</Link>
         <Link href="#contato">Contato</Link>

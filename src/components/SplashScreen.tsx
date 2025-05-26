@@ -1,5 +1,6 @@
 'use client';
 
+import { useHasMounted } from '@/hooks/useHasMounted';
 import { useTheme } from '@/providers/theme-provider';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -26,12 +27,8 @@ const SplashContainer = styled.div<{ $fade: boolean; $isDark: boolean }>`
 
 export default function SplashScreen() {
   const [fade, setFade] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false);
+  const hasMounted = useHasMounted();
   const { isDark } = useTheme();
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {

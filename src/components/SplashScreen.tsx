@@ -13,6 +13,18 @@ const fadeOut = keyframes`
   }
 `;
 
+const pulse = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
 const SplashContainer = styled.div<{ $fade: boolean; $isDark: boolean }>`
   position: fixed;
   z-index: 9999;
@@ -23,6 +35,10 @@ const SplashContainer = styled.div<{ $fade: boolean; $isDark: boolean }>`
   align-items: center;
   transition: opacity 0.6s ease;
   animation: ${({ $fade }) => ($fade ? fadeOut : 'none')} 0.6s forwards;
+`;
+
+const LogoWrapper = styled.div`
+  animation: ${pulse} 2s infinite ease-in-out;
 `;
 
 export default function SplashScreen() {
@@ -41,17 +57,19 @@ export default function SplashScreen() {
 
   return (
     <SplashContainer $fade={fade} $isDark={isDark}>
-      <Image
-        src={
-          isDark
-            ? '/assets/icons/logo-white.svg'
-            : '/assets/icons/logo-black.svg'
-        }
-        alt="Logo"
-        width={150}
-        height={150}
-        priority
-      />
+      <LogoWrapper>
+        <Image
+          src={
+            isDark
+              ? '/assets/icons/logo-white.svg'
+              : '/assets/icons/logo-black.svg'
+          }
+          alt="Logo"
+          width={150}
+          height={150}
+          priority
+        />
+      </LogoWrapper>
     </SplashContainer>
   );
 }

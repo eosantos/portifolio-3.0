@@ -1,11 +1,17 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    appDir: true
-  },
+import { NextConfig } from 'next';
+import path from 'path';
+
+const nextConfig: NextConfig = {
   compiler: {
-    styledComponents: true // se estiver usando styled-components
+    styledComponents: true
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@': path.resolve(__dirname, 'src')
+    };
+    return config;
   }
 };
 
-module.exports = nextConfig;
+export default nextConfig;

@@ -15,6 +15,10 @@
     "incremental": true,
     "types": ["@types/styled-components"],
     "baseUrl": "src",
+    "paths": {
+      "@/*": ["./*"]
+    },
+
 
     "plugins": [
       {
@@ -22,11 +26,8 @@
         "prettier": true
       }
     ],
-
-    "paths": {
-      "@/*": ["./src/*"]
-    }
   },
+
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src"],
   "exclude": ["node_modules"]
 }

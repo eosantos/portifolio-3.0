@@ -1,8 +1,8 @@
 'use client';
 
+import PerfilImage from '@/components/PerfilImage';
+import { media } from '@/styles/media';
 import styled from 'styled-components';
-import PerfilImage from '../../components/PerfilImage';
-import { media } from '../../styles/media';
 
 const Container = styled.section`
   padding: 4rem 2rem;

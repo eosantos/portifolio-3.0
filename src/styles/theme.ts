@@ -1,5 +1,6 @@
 // src/styles/theme.ts
 export const lightTheme = {
+  title: 'dark',
   background: '#f8f8f2',
   text: '#282a36',
   currentline: '#44475a',
@@ -16,6 +17,7 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
+  title: 'light',
   background: '#282a36',
   text: '#f8f8f2',
   currentline: '#44475a',

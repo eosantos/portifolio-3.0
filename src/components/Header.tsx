@@ -1,9 +1,10 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { media } from '../styles/media';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -66,17 +67,6 @@ const RightSection = styled.div`
   }
 `;
 
-const Logo = styled.h1`
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: ${({ theme }) => theme.text};
-  text-decoration: none;
-
-  &:hover {
-    color: ${({ theme }) => theme.purple};
-  }
-`;
-
 const MobileMenuButton = styled.button`
   display: none;
   background: none;
@@ -91,12 +81,24 @@ const MobileMenuButton = styled.button`
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const theme = useTheme();
+
+  const logoSrc =
+    theme.title === 'light'
+      ? '/assets/icons/logo-white.svg'
+      : '/assets/icons/logo-black.svg';
 
   return (
     <HeaderContainer>
       <LeftSection>
         <Link href="/">
-          <Logo>Eduardo</Logo>
+          <Image
+            src={logoSrc}
+            alt="Logo Eduardo"
+            width={140}
+            height={40}
+            priority
+          />
         </Link>
       </LeftSection>
 

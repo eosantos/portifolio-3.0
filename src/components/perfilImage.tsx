@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { media } from '../styles/media';
 
 const ImageWrapper = styled.div`
-  width: 50%;
+  width: 35%;
   aspect-ratio: 1 / 1;
   border-radius: 12px;
 
@@ -13,7 +13,7 @@ const ImageWrapper = styled.div`
   background-color: ${({ theme }) => theme.background};
 
   ${media.lessThan('lg')} {
-    width: 70%;
+    width: 100%;
     aspect-ratio: 1 / 1;
     margin-top: 0;
   }

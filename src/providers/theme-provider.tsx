@@ -1,4 +1,3 @@
-// src/providers/theme-provider.tsx
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -20,17 +19,18 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === 'undefined') return true;
+    return document.documentElement.classList.contains('dark');
+  });
 
   useEffect(() => {
-    const stored = localStorage.getItem('theme');
-    if (stored === 'dark') {
-      setIsDark(true);
-    }
-  }, []);
+    const root = document.documentElement;
+    const newTheme = isDark ? 'dark' : 'light';
 
-  useEffect(() => {
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    root.classList.remove(isDark ? 'light' : 'dark');
+    root.classList.add(newTheme);
+    localStorage.setItem('theme', newTheme);
   }, [isDark]);
 
   function toggleTheme() {

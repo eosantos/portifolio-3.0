@@ -12,7 +12,7 @@ const Container = styled.section`
   text-align: center;
 
   ${media.greaterThan('md')} {
-    padding: 6rem 0rem;
+    padding: 6rem 4rem;
   }
 
   ${media.greaterThan('lg')} {
@@ -24,11 +24,6 @@ const Container = styled.section`
 
 const Content = styled.div`
   max-width: 600px;
-  align-items: center;
-
-  ${media.greaterThan('lg')} {
-    padding: 0rem 3rem;
-  }
 
   h1 {
     font-size: 2.4rem;

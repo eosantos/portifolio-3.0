@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { media } from '../styles/media';
 
 const ImageWrapper = styled.div`
-  width: 35%;
+  width: 40%;
   aspect-ratio: 1 / 1;
   border-radius: 12px;
 

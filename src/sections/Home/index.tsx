@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import ImageWrapper from '../../components/PerfilImage';
+import PerfilImage from '../../components/PerfilImage';
 import { media } from '../../styles/media';
 
 const Container = styled.section`
@@ -60,7 +60,7 @@ export default function HomeSection() {
           acessíveis e com ótimo design. Vamos criar algo incrível juntos?
         </p>
       </Content>
-      <ImageWrapper />
+      <PerfilImage />
     </Container>
   );
 }

@@ -80,12 +80,13 @@ const MobileMenuButton = styled.button`
   }
 `;
 
-const LangButton = styled.button`
+const FlagButton = styled.button`
   background: none;
   border: none;
+  padding: 0;
   cursor: pointer;
-  color: ${({ theme }) => theme.text};
-  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
 `;
 
 export default function Header() {
@@ -97,6 +98,9 @@ export default function Header() {
     theme.title === 'light'
       ? '/assets/icons/logo-white.svg'
       : '/assets/icons/logo-black.svg';
+
+  const flagSrc =
+    lang === 'pt' ? '/assets/flags/br.svg' : '/assets/flags/us.svg';
 
   return (
     <HeaderContainer>
@@ -119,9 +123,15 @@ export default function Header() {
       </CenterSection>
 
       <RightSection>
-        <LangButton onClick={toggleLanguage}>
-          {lang === 'pt' ? 'EN' : 'PT'}
-        </LangButton>
+        <FlagButton onClick={toggleLanguage} title="Mudar idioma">
+          <Image
+            src={flagSrc}
+            alt={lang === 'pt' ? 'Português' : 'English'}
+            width={24}
+            height={24}
+            priority
+          />
+        </FlagButton>
         <ThemeToggle />
         <MobileMenuButton onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FiX /> : <FiMenu />}

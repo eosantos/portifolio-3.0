@@ -1,6 +1,7 @@
 'use client';
 
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { useLanguage } from '@/providers/LanguageProvider';
 import { media } from '@/styles/media';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -79,9 +80,18 @@ const MobileMenuButton = styled.button`
   }
 `;
 
+const LangButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: ${({ theme }) => theme.text};
+  font-size: 0.9rem;
+`;
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const theme = useTheme();
+  const { lang, toggleLanguage } = useLanguage();
 
   const logoSrc =
     theme.title === 'light'
@@ -109,6 +119,9 @@ export default function Header() {
       </CenterSection>
 
       <RightSection>
+        <LangButton onClick={toggleLanguage}>
+          {lang === 'pt' ? 'EN' : 'PT'}
+        </LangButton>
         <ThemeToggle />
         <MobileMenuButton onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FiX /> : <FiMenu />}

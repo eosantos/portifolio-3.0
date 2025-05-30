@@ -1,7 +1,7 @@
 'use client';
 
 import i18n from '@/i18n';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 interface LanguageContextProps {
   lang: 'pt' | 'en';
@@ -16,10 +16,19 @@ const LanguageContext = createContext<LanguageContextProps>({
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<'pt' | 'en'>('pt');
 
+  useEffect(() => {
+    const storedLang = localStorage.getItem('lang') as 'pt' | 'en' | null;
+    if (storedLang) {
+      setLang(storedLang);
+      i18n.changeLanguage(storedLang);
+    }
+  }, []);
+
   const toggleLanguage = () => {
     const newLang = lang === 'pt' ? 'en' : 'pt';
     setLang(newLang);
     i18n.changeLanguage(newLang);
+    localStorage.setItem('lang', newLang);
   };
 
   return (

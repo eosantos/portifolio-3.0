@@ -1,6 +1,11 @@
 {
-  "hello": "Olá",
-  "about": "Sobre",
-  "projects": "Projetos",
-  "contact": "Contato"
+  "nav": {
+    "about": "Sobre",
+    "projects": "Projetos",
+    "contact": "Contato"
+  },
+    "home": {
+    "title": "Olá, eu sou o Eduardo 👋",
+    "description": "Desenvolvedor Front-end com foco em interfaces performáticas, acessíveis e com ótimo design. Vamos criar algo incrível juntos?"
+  }
 }

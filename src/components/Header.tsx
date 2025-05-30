@@ -6,6 +6,7 @@ import { media } from '@/styles/media';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FiMenu, FiX } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
 
@@ -93,6 +94,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const theme = useTheme();
   const { lang, toggleLanguage } = useLanguage();
+  const { t } = useTranslation();
 
   const logoSrc =
     theme.title === 'light'
@@ -117,9 +119,9 @@ export default function Header() {
       </LeftSection>
 
       <CenterSection $isOpen={isOpen}>
-        <Link href="#sobre">Sobre</Link>
-        <Link href="#projetos">Projetos</Link>
-        <Link href="#contato">Contato</Link>
+        <Link href="#sobre">{t('nav.about')}</Link>
+        <Link href="#projetos">{t('nav.projects')}</Link>
+        <Link href="#contato">{t('nav.contact')}</Link>
       </CenterSection>
 
       <RightSection>

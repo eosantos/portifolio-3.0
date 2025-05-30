@@ -1,6 +1,11 @@
 {
-  "hello": "Hello",
-  "about": "About",
-  "projects": "Projects",
-  "contact": "Contact"
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "home": {
+    "title": "Hi, I'm Eduardo 👋",
+    "description": "Front-end developer focused on performant, accessible interfaces with great design. Shall we build something amazing together?"
+  }
 }

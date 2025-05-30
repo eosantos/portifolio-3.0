@@ -1,3 +1,5 @@
+'use client';
+
 import i18n from '@/i18n';
 import { createContext, useContext, useState } from 'react';
 

@@ -2,6 +2,7 @@
 
 import PerfilImage from '@/components/PerfilImage';
 import { media } from '@/styles/media';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 const Container = styled.section`
@@ -51,14 +52,13 @@ const Content = styled.div`
 `;
 
 export default function HomeSection() {
+  const { t } = useTranslation();
+
   return (
     <Container>
       <Content>
-        <h1>Olá, eu sou o Eduardo 👋</h1>
-        <p>
-          Desenvolvedor Front-end com foco em interfaces performáticas,
-          acessíveis e com ótimo design. Vamos criar algo incrível juntos?
-        </p>
+        <h1>{t('home.title')}</h1>
+        <p>{t('home.description')}</p>
       </Content>
       <PerfilImage />
     </Container>

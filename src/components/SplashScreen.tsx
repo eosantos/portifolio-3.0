@@ -13,15 +13,12 @@ const fadeOut = keyframes`
   }
 `;
 
-const pulse = keyframes`
-  0% {
-    transform: scale(1);
+const bounce = keyframes`
+  0%, 100% {
+    transform: translateY(0);
   }
   50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
+    transform: translateY(-10px);
   }
 `;
 
@@ -37,39 +34,46 @@ const SplashContainer = styled.div<{ $fade: boolean; $isDark: boolean }>`
   animation: ${({ $fade }) => ($fade ? fadeOut : 'none')} 0.6s forwards;
 `;
 
-const LogoWrapper = styled.div`
-  animation: ${pulse} 2s infinite ease-in-out;
+const AnimatedLogo = styled(Image)`
+  animation: ${bounce} 1.2s infinite;
 `;
 
 export default function SplashScreen() {
   const [fade, setFade] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
   const hasMounted = useHasMounted();
   const { isDark } = useTheme();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const fadeTimeout = setTimeout(() => {
       setFade(true);
-    }, 1500);
-    return () => clearTimeout(timer);
+    }, 1500); // tempo antes de começar o fade
+
+    const removeTimeout = setTimeout(() => {
+      setShowSplash(false);
+    }, 2100); // 1500 + 600ms de animação
+
+    return () => {
+      clearTimeout(fadeTimeout);
+      clearTimeout(removeTimeout);
+    };
   }, []);
 
-  if (!hasMounted) return null;
+  if (!hasMounted || !showSplash) return null;
 
   return (
     <SplashContainer $fade={fade} $isDark={isDark}>
-      <LogoWrapper>
-        <Image
-          src={
-            isDark
-              ? '/assets/icons/logo-white.svg'
-              : '/assets/icons/logo-black.svg'
-          }
-          alt="Logo"
-          width={150}
-          height={150}
-          priority
-        />
-      </LogoWrapper>
+      <AnimatedLogo
+        src={
+          isDark
+            ? '/assets/icons/logo-white.svg'
+            : '/assets/icons/logo-black.svg'
+        }
+        alt="Logo"
+        width={150}
+        height={150}
+        priority
+      />
     </SplashContainer>
   );
 }

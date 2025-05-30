@@ -1,9 +1,8 @@
-import FadeWrapper from '@/components/FadeWrapper';
-import SplashWrapper from '@/components/SplashWrapper';
+import { FadeWrapper, SplashWrapper } from '@/components/splash';
+import { ThemeProvider } from '@/providers/theme-provider';
 import type { Metadata } from 'next';
 import { Catamaran } from 'next/font/google';
 import Script from 'next/script';
-import { ThemeProvider } from '../providers/theme-provider';
 
 const catamaran = Catamaran({
   subsets: ['latin'],

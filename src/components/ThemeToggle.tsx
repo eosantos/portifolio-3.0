@@ -1,6 +1,6 @@
+import { useTheme } from '@/providers/theme-provider'; // importe o hook correto
 import { FiMoon, FiSun } from 'react-icons/fi';
 import styled from 'styled-components';
-import { useTheme } from '../providers/theme-provider'; // importe o hook correto
 
 const ToggleButton = styled.button`
   background: none;

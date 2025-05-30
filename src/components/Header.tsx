@@ -1,12 +1,12 @@
 'use client';
 
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { media } from '@/styles/media';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
-import { media } from '../styles/media';
-import { ThemeToggle } from './ThemeToggle';
 
 const HeaderContainer = styled.header`
   position: fixed;

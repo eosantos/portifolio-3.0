@@ -1,9 +1,9 @@
 // components/SplashWrapper.tsx
 'use client';
 
+import Header from '@/components/Header';
+import SplashScreen from '@/components/splash/SplashScreen';
 import { useEffect, useState } from 'react';
-import Header from './Header';
-import SplashScreen from './SplashScreen';
 
 export default function SplashWrapper({
   children

@@ -11,8 +11,48 @@ const catamaran = Catamaran({
 });
 
 export const metadata: Metadata = {
-  title: 'Dudev',
-  description: 'Desenvolvedor Front-end'
+  title: {
+    default: 'Dudev – Desenvolvedor Front-end',
+    template: '%s | Dudev'
+  },
+  description:
+    'Portfólio de Eduardo – Desenvolvedor Front-end focado em performance, acessibilidade e design moderno.',
+  keywords: [
+    'Desenvolvedor Front-end',
+    'React Developer',
+    'Portfólio Dev',
+    'Next.js',
+    'Eduardo Dev',
+    'Frontend Developer',
+    'UI Developer'
+  ],
+  authors: [{ name: 'Eduardo', url: 'https://dudev.com.br' }],
+  creator: 'Eduardo',
+  metadataBase: new URL('https://dudev.com.br'),
+  openGraph: {
+    title: 'Dudev – Desenvolvedor Front-end',
+    description:
+      'Portfólio de Eduardo com foco em interfaces modernas e performáticas.',
+    url: 'https://dudev.com.br',
+    siteName: 'Dudev',
+    images: [
+      {
+        url: '/assets/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Imagem de capa do site Dudev'
+      }
+    ],
+    locale: 'pt_BR',
+    type: 'website'
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dudev – Desenvolvedor Front-end',
+    description: 'Interfaces modernas, acessíveis e performáticas.',
+    images: ['/assets/og-image.png'],
+    creator: '@dudev'
+  }
 };
 
 export default function RootLayout({

@@ -1,0 +1,12 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg" style="background:#282a36">
+  <rect width="1200" height="630" fill="#282a36"/>
+  <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="64" fill="#61dafb">
+    Eduardo Oliveira
+  </text>
+  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-weight="400" font-size="32" fill="#f8f8f2">
+    Desenvolvedor Front-end
+  </text>
+  <text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-weight="300" font-size="24" fill="#6272a4">
+    Interfaces modernas, acessíveis e performáticas
+  </text>
+</svg>

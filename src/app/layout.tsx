@@ -1,5 +1,6 @@
 import { FadeWrapper, SplashWrapper } from '@/components/splash';
 import PageTransition from '@/components/transition/PageTransition';
+import { LanguageProvider } from '@/providers/LanguageProvider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import type { Metadata } from 'next';
 import { Catamaran } from 'next/font/google';
@@ -78,11 +79,13 @@ export default function RootLayout({
       </head>
       <body className={catamaran.className}>
         <ThemeProvider>
-          <SplashWrapper>
-            <FadeWrapper>
-              <PageTransition>{children}</PageTransition>
-            </FadeWrapper>
-          </SplashWrapper>
+          <LanguageProvider>
+            <SplashWrapper>
+              <FadeWrapper>
+                <PageTransition>{children}</PageTransition>
+              </FadeWrapper>
+            </SplashWrapper>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

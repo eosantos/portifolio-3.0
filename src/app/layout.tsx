@@ -1,5 +1,6 @@
 import { FadeWrapper, SplashWrapper } from '@/components/splash';
 import PageTransition from '@/components/transition/PageTransition';
+import '@/i18n';
 import { LanguageProvider } from '@/providers/LanguageProvider';
 import { ThemeProvider } from '@/providers/theme-provider';
 import type { Metadata } from 'next';

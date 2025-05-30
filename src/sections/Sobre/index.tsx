@@ -1,8 +1,8 @@
-// src/sections/About/index.tsx
 'use client';
 
 import { media } from '@/styles/media';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 const Section = styled.section`
@@ -57,7 +57,7 @@ const Content = styled.div`
     background: ${({ theme }) => theme.background};
     border: 2px solid ${({ theme }) => theme.text};
     position: relative;
-    top: 0.75rem; /* faz o “overflow” para baixo */
+    top: 0.75rem;
   }
 
   p {
@@ -73,6 +73,8 @@ const Content = styled.div`
 `;
 
 export default function AboutSection() {
+  const { t } = useTranslation();
+
   return (
     <Section id="sobre">
       <Photo>
@@ -80,40 +82,15 @@ export default function AboutSection() {
       </Photo>
 
       <Content>
-        <h2>sobre mim</h2>
+        <h2>{t('about.title')}</h2>
 
         <div className="subtitle-wrapper">
-          <span className="subtitle">quem eu sou</span>
+          <span className="subtitle">{t('about.subtitle')}</span>
         </div>
 
-        <p>
-          Meu nome é <strong>Eduardo Oliveira</strong>. <br />
-          Sou desenvolvedor
-          <strong>front-end</strong> com sólida experiência em{' '}
-          <strong>ReactJS</strong>, <strong>JavaScript</strong> e{' '}
-          <strong>TypeScript</strong>, e atualmente focado em projetos com{' '}
-          <strong>Next.js</strong>. Tenho paixão por criar interfaces
-          responsivas e intuitivas, buscando sempre a melhor experiência de
-          usuário. Utilizo ferramentas como <strong>Styled-Components</strong> e{' '}
-          <strong>SASS</strong> para layouts modernos e funcionais.
-          <br />
-          <br />
-        </p>
-        <p>
-          Minha experiência inclui <strong>Redux</strong> para state management,
-          <strong> Axios</strong> para requisições HTTP e recursos do{' '}
-          <strong>Next.js</strong> como API Routes e SSR. Também trabalho com{' '}
-          <strong>NodeJS</strong>, <strong>Bootstrap</strong>,{' '}
-          <strong>MUI</strong>, <strong>Jest</strong>, <strong>Cypress</strong>,{' '}
-          <strong>SQL</strong> e <strong>Docker</strong>. Utilizo{' '}
-          <strong>Figma</strong> para wireframes e protótipos.
-          <br />
-          <br />
-          Tenho conhecimentos em arquitetura de software e metodologias ágeis
-          (Scrum, Kanban) e estudo <strong>Node.js</strong> para me tornar
-          full-stack. Estou aberto a oportunidades e desafios empolgantes na
-          indústria de tecnologia. Sinta-se à vontade para entrar em contato!
-        </p>
+        <p dangerouslySetInnerHTML={{ __html: t('about.paragraph1') }} />
+        <p dangerouslySetInnerHTML={{ __html: t('about.paragraph2') }} />
+        <p dangerouslySetInnerHTML={{ __html: t('about.paragraph3') }} />
       </Content>
     </Section>
   );

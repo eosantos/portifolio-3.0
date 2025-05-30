@@ -1,18 +1,7 @@
 {
-  "nav": {
-    "about": "Sobre",
-    "projects": "Projetos",
-    "contact": "Contato"
-  },
-    "home": {
-    "title": "Olá, eu sou o Eduardo 👋",
-    "description": "Desenvolvedor Front-end com foco em interfaces performáticas, acessíveis e com ótimo design. Vamos criar algo incrível juntos?"
-  },
-      "about": {
-      "title": "sobre mim",
+  "title": "sobre mim",
   "subtitle": "quem eu sou",
   "paragraph1": "Meu nome é <strong>Eduardo Oliveira</strong>. Sou desenvolvedor <strong>front-end</strong> com sólida experiência em <strong>ReactJS</strong>, <strong>JavaScript</strong> e <strong>TypeScript</strong>, e atualmente focado em projetos com <strong>Next.js</strong>. Tenho paixão por criar interfaces responsivas e intuitivas, buscando sempre a melhor experiência de usuário. Utilizo ferramentas como <strong>Styled-Components</strong> e <strong>SASS</strong> para layouts modernos e funcionais.",
   "paragraph2": "Minha experiência inclui <strong>Redux</strong> para state management, <strong>Axios</strong> para requisições HTTP e recursos do <strong>Next.js</strong> como API Routes e SSR. Também trabalho com <strong>NodeJS</strong>, <strong>Bootstrap</strong>, <strong>MUI</strong>, <strong>Jest</strong>, <strong>Cypress</strong>, <strong>SQL</strong> e <strong>Docker</strong>. Utilizo <strong>Figma</strong> para wireframes e protótipos.",
   "paragraph3": "Tenho conhecimentos em arquitetura de software e metodologias ágeis (Scrum, Kanban) e estudo <strong>Node.js</strong> para me tornar full-stack. Estou aberto a oportunidades e desafios empolgantes na indústria de tecnologia. Sinta-se à vontade para entrar em contato!"
-  }
 }

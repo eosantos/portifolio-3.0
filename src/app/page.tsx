@@ -14,7 +14,6 @@ export default function App() {
       </button>
       <Home />
       <Sobre />
-      {/* You can add more sections here as needed */}
     </main>
   );
 }

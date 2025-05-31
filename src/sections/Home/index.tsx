@@ -6,9 +6,11 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 const Container = styled.section`
-  padding: 4rem 2rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  max-width: 1280px;
+  margin: 0 auto;
   align-items: center;
   text-align: center;
 
@@ -19,7 +21,7 @@ const Container = styled.section`
   ${media.greaterThan('lg')} {
     flex-direction: row;
     text-align: left;
-    justify-content: space-around;
+    justify-content: space-between;
   }
 `;
 

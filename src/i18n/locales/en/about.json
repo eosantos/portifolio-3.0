@@ -1,7 +1,0 @@
-{
-  "title": "about me",
-  "subtitle": "who I am",
-  "paragraph1": "My name is <strong>Eduardo Oliveira</strong>. I am a <strong>front-end</strong> developer with solid experience in <strong>ReactJS</strong>, <strong>JavaScript</strong>, and <strong>TypeScript</strong>, currently focused on projects with <strong>Next.js</strong>. I have a passion for creating responsive and intuitive interfaces, always seeking the best user experience. I use tools like <strong>Styled-Components</strong> and <strong>SASS</strong> to develop modern and functional layouts.",
-  "paragraph2": "My experience includes <strong>Redux</strong> for state management, <strong>Axios</strong> for HTTP requests, and Next.js features like API Routes and SSR. I also work with <strong>NodeJS</strong>, <strong>Bootstrap</strong>, <strong>MUI</strong>, <strong>Jest</strong>, <strong>Cypress</strong>, <strong>SQL</strong>, and <strong>Docker</strong>. I use <strong>Figma</strong> for wireframes and prototypes.",
-  "paragraph3": "I have knowledge of software architecture and agile methodologies (Scrum, Kanban), and I’m studying <strong>Node.js</strong> to become a full-stack developer. I’m open to exciting opportunities and challenges in the tech industry. Feel free to get in touch!"
-}

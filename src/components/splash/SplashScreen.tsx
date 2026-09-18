@@ -47,11 +47,15 @@ export default function SplashScreen() {
   useEffect(() => {
     const fadeTimeout = setTimeout(() => {
       setFade(true);
-    }, 1500); // tempo antes de começar o fade
+    }, 1500);
 
     const removeTimeout = setTimeout(() => {
       setShowSplash(false);
-    }, 2100); // 1500 + 600ms de animação
+      // Notify SplashWrapper that splash is complete
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new Event('splash-complete'));
+      }
+    }, 2100);
 
     return () => {
       clearTimeout(fadeTimeout);
@@ -62,8 +66,13 @@ export default function SplashScreen() {
   if (!hasMounted || !showSplash) return null;
 
   return (
-    <SplashContainer $fade={fade} $isDark={isDark}>
+    <SplashContainer
+      data-testid="splash-container"
+      $fade={fade}
+      $isDark={isDark}
+    >
       <AnimatedLogo
+        data-testid="animated-logo"
         src={
           isDark
             ? '/assets/icons/logo-white.svg'

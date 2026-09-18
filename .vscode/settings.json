@@ -14,6 +14,6 @@
   "workbench.activityBar.location": "default",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.eol": "\n",
-  "workbench.panel.defaultLocation": "bottom"
-
+  "workbench.panel.defaultLocation": "bottom",
+  "markdown.validate.enabled": false
 }

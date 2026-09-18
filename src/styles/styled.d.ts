@@ -12,6 +12,8 @@ declare module 'styled-components' {
     comment: string;
     can: string;
     geen: string;
+    cyan: string;
+    green: string;
     orange: string;
     pink: string;
     purple: string;

@@ -1,12 +1,15 @@
 // src/styles/theme.ts
 export const lightTheme = {
-  title: 'dark',
+  title: 'light',
   background: '#f8f8f2',
   text: '#282a36',
   currentline: '#44475a',
   selection: '#44475a',
-  foreground: '#f8ff2',
+  foreground: '#f8f8f2',
   comment: '#6272a4',
+  cyan: '#8be9fd',
+  green: '#50fa7b',
+  // Aliases for styled-components compatibility
   can: '#8be9fd',
   geen: '#50fa7b',
   orange: '#ffb86c',
@@ -17,13 +20,16 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  title: 'light',
+  title: 'dark',
   background: '#282a36',
   text: '#f8f8f2',
   currentline: '#44475a',
   selection: '#44475a',
-  foreground: '#f8ff2',
+  foreground: '#f8f8f2',
   comment: '#6272a4',
+  cyan: '#8be9fd',
+  green: '#50fa7b',
+  // Aliases for styled-components compatibility
   can: '#8be9fd',
   geen: '#50fa7b',
   orange: '#ffb86c',

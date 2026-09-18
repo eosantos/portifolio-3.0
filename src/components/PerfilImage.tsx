@@ -19,5 +19,5 @@ const ImageWrapper = styled.div`
   }
 `;
 export default function PerfilImage() {
-  return <ImageWrapper />;
+  return <ImageWrapper data-testid="perfil-image-wrapper" />;
 }

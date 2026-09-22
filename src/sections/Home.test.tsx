@@ -1,12 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { LanguageProvider } from '@/providers/LanguageProvider';
+import { ScrollProgressProvider } from '@/hooks/useScrollProgress';
 import Home from '@/sections/Home';
 
 const renderWithProviders = (component: React.ReactNode) => {
   return render(
     <ThemeProvider>
-      <LanguageProvider>{component}</LanguageProvider>
+      <LanguageProvider>
+        <ScrollProgressProvider>{component}</ScrollProgressProvider>
+      </LanguageProvider>
     </ThemeProvider>
   );
 };

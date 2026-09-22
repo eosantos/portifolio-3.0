@@ -1,5 +1,6 @@
 'use client';
 
+import { motion, useTransform } from 'framer-motion';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useLanguage } from '@/providers/LanguageProvider';
 import { media } from '@/styles/media';
@@ -9,8 +10,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiMenu, FiX } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
+import { useHeaderScroll } from '@/hooks/useHeaderScroll';
 
-const HeaderContainer = styled.header`
+const HeaderContainer = styled(motion.header)`
   position: fixed;
   top: 0;
   width: 100%;
@@ -95,6 +97,8 @@ export default function Header() {
   const theme = useTheme();
   const { lang, toggleLanguage } = useLanguage();
   const { t } = useTranslation();
+  const { backgroundOpacity, backdropBlur, heightScale, borderOpacity } =
+    useHeaderScroll();
 
   const logoSrc =
     theme.title === 'light'
@@ -104,8 +108,33 @@ export default function Header() {
   const flagSrc =
     lang === 'pt' ? '/assets/flags/br.svg' : '/assets/flags/us.svg';
 
+  // Create derived MotionValues for complex transformations
+  const backgroundColor = useTransform(backgroundOpacity, (o: number) => {
+    const bg = theme.background;
+    const [r, g, b] = bg.match(/\d+/g)?.map(Number) || [248, 248, 242];
+    return `rgba(${r}, ${g}, ${b}, ${o})`;
+  });
+
+  const backdropFilter = useTransform(
+    backdropBlur,
+    (b: number) => `blur(${b}px)`
+  );
+  const borderColor = useTransform(
+    borderOpacity,
+    (o: number) => `rgba(68, 71, 90, ${o})`
+  );
+  const headerScale = useTransform(heightScale, (s: number) => `scaleY(${s})`);
+
   return (
-    <HeaderContainer>
+    <HeaderContainer
+      style={{
+        backgroundColor,
+        backdropFilter,
+        borderBottomColor: borderColor,
+        transform: headerScale,
+        transformOrigin: 'top'
+      }}
+    >
       <LeftSection>
         <Link href="/">
           <Image

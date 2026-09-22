@@ -77,16 +77,10 @@ vi.mock('styled-components', async () => {
 });
 
 // Mock framer-motion
-vi.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-      <div {...props}>{children}</div>
-    )
-  },
-  AnimatePresence: ({ children }: { children: React.ReactNode }) => (
-    <>{children}</>
-  )
-}));
+vi.mock('framer-motion', async () => {
+  const mockModule = await import('@/__mocks__/framer-motion');
+  return mockModule;
+});
 
 // Mock react-icons
 vi.mock('react-icons/fi', () => ({

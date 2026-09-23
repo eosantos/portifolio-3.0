@@ -23,22 +23,39 @@ describe('HomeSection', () => {
 
   it('renders without crashing', () => {
     renderWithProviders(<Home />);
-    expect(screen.getByText('home.title')).toBeInTheDocument();
+    expect(screen.getByText('home.eyebrow')).toBeInTheDocument();
   });
 
-  it('displays translated title', () => {
+  it('displays eyebrow with name', () => {
     renderWithProviders(<Home />);
-    expect(screen.getByText('home.title')).toBeInTheDocument();
+    expect(screen.getByText('home.eyebrow')).toBeInTheDocument();
   });
 
-  it('displays translated description', () => {
+  it('displays display lines', () => {
     renderWithProviders(<Home />);
+    expect(screen.getByText('home.displayA')).toBeInTheDocument();
+    expect(screen.getByText('home.displayB')).toBeInTheDocument();
+    expect(screen.getByText('home.displayC')).toBeInTheDocument();
+  });
+
+  it('displays headline and description', () => {
+    renderWithProviders(<Home />);
+    expect(screen.getByText('home.headline')).toBeInTheDocument();
     expect(screen.getByText('home.description')).toBeInTheDocument();
   });
 
-  it('renders PerfilImage component', () => {
+  it('renders contact CTA linking to contato', () => {
     renderWithProviders(<Home />);
-    expect(screen.getByTestId('perfil-image-wrapper')).toBeInTheDocument();
+    const cta = screen.getByRole('link', { name: 'home.contactCta' });
+    expect(cta).toBeInTheDocument();
+    expect(cta).toHaveAttribute('href', '#contato');
+  });
+
+  it('renders skip link linking to sobre', () => {
+    renderWithProviders(<Home />);
+    const skip = screen.getByRole('link', { name: 'home.skipIntro' });
+    expect(skip).toBeInTheDocument();
+    expect(skip).toHaveAttribute('href', '#sobre');
   });
 
   it('has correct container styling', () => {
@@ -47,46 +64,16 @@ describe('HomeSection', () => {
     expect(section).toBeInTheDocument();
   });
 
-  it('has responsive padding', () => {
-    const { container } = renderWithProviders(<Home />);
-    const section = container.querySelector('section');
-    expect(section).toBeInTheDocument();
-  });
-
-  it('centers content on mobile', () => {
-    const { container } = renderWithProviders(<Home />);
-    const section = container.querySelector('section');
-    expect(section).toBeInTheDocument();
-  });
-
-  it('switches to row layout on desktop', () => {
-    const { container } = renderWithProviders(<Home />);
-    const section = container.querySelector('section');
-    // The media query for lg breakpoint should exist
-    expect(section).toBeInTheDocument();
-  });
-
-  it('content has max-width constraint', () => {
-    const { container } = renderWithProviders(<Home />);
-    const content = container.querySelector('section > div');
-    expect(content).toBeInTheDocument();
-  });
-
-  it('title uses theme color', () => {
-    const { container } = renderWithProviders(<Home />);
-    const title = container.querySelector('h1');
-    expect(title).toBeInTheDocument();
-  });
-
-  it('description uses theme color', () => {
-    const { container } = renderWithProviders(<Home />);
-    const description = container.querySelector('p');
-    expect(description).toBeInTheDocument();
-  });
-
-  it('is accessible - heading structure', () => {
+  it('does not render profile image (typographic hero)', () => {
     renderWithProviders(<Home />);
-    const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toBeInTheDocument();
+    expect(
+      screen.queryByTestId('perfil-image-wrapper')
+    ).not.toBeInTheDocument();
+  });
+
+  it('is accessible - single h1 heading structure', () => {
+    renderWithProviders(<Home />);
+    const headings = screen.getAllByRole('heading', { level: 1 });
+    expect(headings).toHaveLength(1);
   });
 });

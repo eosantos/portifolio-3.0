@@ -1,7 +1,8 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import PerfilImage from '@/components/PerfilImage';
+import { gsap } from 'gsap';
 import { media } from '@/styles/media';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -9,78 +10,159 @@ import styled from 'styled-components';
 const Container = styled.section`
   position: relative;
   z-index: 10;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
+  padding: clamp(4.5rem, 9vh, 6rem) 2rem clamp(2rem, 5vh, 3.5rem);
   max-width: 1280px;
   margin: 0 auto;
-  align-items: center;
-  text-align: center;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  overflow: hidden;
   will-change: transform, opacity;
 
   ${media.greaterThan('md')} {
-    padding: 6rem 4rem;
-  }
-
-  ${media.greaterThan('lg')} {
-    flex-direction: row;
-    text-align: left;
-    justify-content: space-between;
-    align-items: center;
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 `;
 
-const Content = styled.div`
-  max-width: 600px;
-  flex-shrink: 0;
-  will-change: transform, opacity;
+const Eyebrow = styled.p`
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.purple};
+  margin: 0 0 1.25rem;
 
-  h1 {
-    font-size: 2.4rem;
-    color: ${({ theme }) => theme.text};
-    line-height: 1.1;
-    font-weight: 300;
-
-    ${media.greaterThan('md')} {
-      font-size: 3.2rem;
-    }
-
-    ${media.greaterThan('lg')} {
-      font-size: 4.5rem;
-    }
-  }
-
-  p {
-    font-size: 1.2rem;
-    margin-top: 1.5rem;
-    line-height: 1.6;
-    color: ${({ theme }) => theme.text};
-    font-weight: 300;
-
-    ${media.greaterThan('md')} {
-      font-size: 1.4rem;
-    }
+  ${media.greaterThan('md')} {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 `;
 
-const ImageWrapper = styled.div`
-  position: relative;
-  width: 40%;
-  aspect-ratio: 1 / 1;
-  border-radius: 12px;
-  flex-shrink: 0;
-  will-change: transform, opacity;
+const Display = styled.h1`
+  margin: 0;
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: ${({ theme }) => theme.text};
+  font-size: clamp(2.75rem, 9vw, 7rem);
+  text-wrap: balance;
 
-  ${media.lessThan('lg')} {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    margin-top: 0;
-    order: -1;
+  ${media.greaterThan('md')} {
+    font-size: clamp(3.5rem, 8.5vw, 7.5rem);
   }
 
-  ${media.greaterThan('lg')} {
-    width: 45%;
+  @media (max-height: 750px) {
+    font-size: clamp(2.25rem, 7vh, 3.5rem);
+  }
+`;
+
+const DisplayLine = styled.span`
+  display: block;
+  will-change: transform, opacity;
+  overflow: hidden;
+`;
+
+const Meta = styled.div`
+  margin-top: 2rem;
+  max-width: 640px;
+  will-change: transform, opacity;
+
+  ${media.greaterThan('md')} {
+    margin-top: 2.25rem;
+  }
+
+  @media (max-height: 750px) {
+    margin-top: 1.25rem;
+  }
+`;
+
+const Stacks = styled.p`
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: ${({ theme }) => theme.text};
+  font-weight: 500;
+  margin: 0;
+
+  ${media.greaterThan('md')} {
+    font-size: 1.35rem;
+  }
+`;
+
+const Description = styled.p`
+  font-size: 1.05rem;
+  margin-top: 1rem;
+  line-height: 1.7;
+  color: ${({ theme }) => theme.comment};
+  font-weight: 400;
+
+  ${media.greaterThan('md')} {
+    font-size: 1.15rem;
+  }
+`;
+
+const CtaRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  align-items: center;
+
+  @media (max-height: 750px) {
+    margin-top: 1.25rem;
+  }
+`;
+
+const PrimaryCta = styled.a`
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  background: ${({ theme }) => theme.purple};
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    opacity: 0.92;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.purple};
+    outline-offset: 3px;
+  }
+`;
+
+const SkipLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  color: ${({ theme }) => theme.comment};
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.text};
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.purple};
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 `;
 
@@ -100,6 +182,10 @@ const ScrollIndicator = styled.div`
   z-index: 5;
 
   ${media.lessThan('md')} {
+    display: none;
+  }
+
+  @media (max-height: 800px) {
     display: none;
   }
 
@@ -127,112 +213,165 @@ export default function HomeSection() {
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Create transformed values using Framer Motion's useTransform
-  // Hero progress: 0 to 1 over first 60% of scroll
+  const eyebrowRef = useRef<HTMLParagraphElement | null>(null);
+  const lineRefs = useRef<Array<HTMLSpanElement | null>>([]);
+  const stacksRef = useRef<HTMLParagraphElement | null>(null);
+  const descRef = useRef<HTMLParagraphElement | null>(null);
+  const ctaRef = useRef<HTMLDivElement | null>(null);
+  const indicatorRef = useRef<HTMLDivElement | null>(null);
+
+  // Entrance timeline: runs once on mount (not scroll-driven, not repeated).
+  // Targets are plain styled nodes; Framer Motion owns the parent motion.*
+  // nodes for scroll, so the two libraries never write to the same node.
+  useEffect(() => {
+    if (isReducedMotion) return;
+
+    const targets = [
+      eyebrowRef.current,
+      ...lineRefs.current,
+      stacksRef.current,
+      descRef.current,
+      ctaRef.current,
+      indicatorRef.current
+    ].filter((el): el is HTMLElement => el !== null);
+    if (targets.length === 0) return;
+
+    const ctx = gsap.context(() => {
+      gsap.set(eyebrowRef.current, { autoAlpha: 0, y: 16 });
+      gsap.set(lineRefs.current, { yPercent: 110 });
+      gsap.set([stacksRef.current, descRef.current, ctaRef.current], {
+        autoAlpha: 0,
+        y: 24
+      });
+      gsap.set(indicatorRef.current, { autoAlpha: 0 });
+
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      tl.to(eyebrowRef.current, { autoAlpha: 1, y: 0, duration: 0.35 }, 0.05)
+        .to(
+          lineRefs.current,
+          { yPercent: 0, duration: 0.6, stagger: 0.08 },
+          0.15
+        )
+        .to(stacksRef.current, { autoAlpha: 1, y: 0, duration: 0.45 }, 0.55)
+        .to(descRef.current, { autoAlpha: 1, y: 0, duration: 0.45 }, 0.65)
+        .to(ctaRef.current, { autoAlpha: 1, y: 0, duration: 0.45 }, 0.75)
+        .to(indicatorRef.current, { autoAlpha: 1, duration: 0.4 }, 0.9);
+    });
+
+    return () => {
+      ctx.revert();
+    };
+  }, [isReducedMotion]);
+
+  // Hero progress: 0 to 1 over first 60% of page scroll
   const heroProgress = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
 
-  // Title scale: 1 -> 0.8 over hero progress
-  const titleScale = useTransform(heroProgress, [0, 1], [1, 0.8]);
+  // Kinetic type: each display line drifts at a different speed (depth)
+  const lineAY = useTransform(heroProgress, [0, 1], [0, 50]);
+  const lineBY = useTransform(heroProgress, [0, 1], [0, 90]);
+  const lineCY = useTransform(heroProgress, [0, 1], [0, 130]);
+  const displayOpacity = useTransform(heroProgress, [0, 0.55], [1, 0]);
 
-  // Title opacity: 1 -> 0 over hero progress
-  const titleOpacity = useTransform(heroProgress, [0, 0.5], [1, 0]);
+  // Meta block fades faster so CTAs hand over to the next scene
+  const metaOpacity = useTransform(heroProgress, [0, 0.4], [1, 0]);
+  const metaY = useTransform(heroProgress, [0, 1], [0, 40]);
 
-  // Description opacity: 1 -> 0 over hero progress (faster fade)
-  const descriptionOpacity = useTransform(heroProgress, [0, 0.5], [1, 0]);
+  // Eyebrow lifts away first
+  const eyebrowOpacity = useTransform(heroProgress, [0, 0.25], [1, 0]);
 
-  // Content translate Y: 0 -> 60px
-  const contentTranslateY = useTransform(heroProgress, [0, 1], [0, 60]);
-
-  // Image scale: 1 -> 0.75
-  const imageScale = useTransform(heroProgress, [0, 1], [1, 0.75]);
-
-  // Image opacity: 1 -> 0.5
-  const imageOpacity = useTransform(heroProgress, [0, 1], [1, 0.5]);
-
-  // Image translate Y: 0 -> -40px
-  const imageTranslateY = useTransform(heroProgress, [0, 1], [0, -40]);
-
-  // Indicator opacity: 1 -> 0
-  const indicatorOpacity = useTransform(heroProgress, [0, 0.3], [1, 0]);
+  // Indicator fades immediately
+  const indicatorOpacity = useTransform(heroProgress, [0, 0.2], [1, 0]);
 
   if (isReducedMotion) {
-    // For reduced motion, return static values
     return (
       <Container id="home">
-        <Container style={{ minHeight: '100vh' }}>
-          <Content>
-            <motion.h1
-              style={{
-                opacity: 1,
-                transform: 'scale(1)',
-                transformOrigin: 'left top'
-              }}
-              transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-            >
-              {t('home.title')}
-            </motion.h1>
-            <motion.p
-              style={{ opacity: 1 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-            >
-              {t('home.description')}
-            </motion.p>
-          </Content>
-          <ImageWrapper>
-            <PerfilImage />
-          </ImageWrapper>
-        </Container>
+        <Eyebrow>{t('home.eyebrow')}</Eyebrow>
+        <Display>
+          <DisplayLine>{t('home.displayA')}</DisplayLine>
+          <DisplayLine>{t('home.displayB')}</DisplayLine>
+          <DisplayLine>{t('home.displayC')}</DisplayLine>
+        </Display>
+        <Meta>
+          <Stacks>{t('home.headline')}</Stacks>
+          <Description>{t('home.description')}</Description>
+          <CtaRow>
+            <PrimaryCta href="#contato">{t('home.contactCta')}</PrimaryCta>
+            <SkipLink href="#sobre">{t('home.skipIntro')}</SkipLink>
+          </CtaRow>
+        </Meta>
       </Container>
     );
   }
 
   return (
     <Container id="home">
-      <motion.div
-        style={{
-          opacity: descriptionOpacity,
-          transform: contentTranslateY
-        }}
-        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-      >
-        <Content>
-          <motion.h1
-            style={{
-              opacity: titleOpacity,
-              transform: titleScale
-            }}
-            transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            {t('home.title')}
-          </motion.h1>
-          <motion.p
-            style={{ opacity: descriptionOpacity }}
-            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            {t('home.description')}
-          </motion.p>
-        </Content>
+      <motion.div style={{ opacity: eyebrowOpacity }}>
+        <Eyebrow ref={eyebrowRef}>{t('home.eyebrow')}</Eyebrow>
       </motion.div>
 
-      <motion.div
-        style={{
-          opacity: imageOpacity,
-          transform: imageScale,
-          y: imageTranslateY,
-          transformOrigin: 'center center'
-        }}
-        transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+      <Display
+        aria-label={`${t('home.displayA')} ${t('home.displayB')} ${t('home.displayC')}`}
       >
-        <ImageWrapper>
-          <PerfilImage />
-        </ImageWrapper>
+        <DisplayLine
+          aria-hidden="true"
+          ref={(el) => {
+            lineRefs.current[0] = el;
+          }}
+        >
+          <motion.span
+            style={{ y: lineAY, opacity: displayOpacity, display: 'block' }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            {t('home.displayA')}
+          </motion.span>
+        </DisplayLine>
+        <DisplayLine
+          aria-hidden="true"
+          ref={(el) => {
+            lineRefs.current[1] = el;
+          }}
+        >
+          <motion.span
+            style={{ y: lineBY, opacity: displayOpacity, display: 'block' }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            {t('home.displayB')}
+          </motion.span>
+        </DisplayLine>
+        <DisplayLine
+          aria-hidden="true"
+          ref={(el) => {
+            lineRefs.current[2] = el;
+          }}
+        >
+          <motion.span
+            style={{ y: lineCY, opacity: displayOpacity, display: 'block' }}
+            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            {t('home.displayC')}
+          </motion.span>
+        </DisplayLine>
+      </Display>
+
+      <motion.div
+        style={{ opacity: metaOpacity, y: metaY }}
+        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
+        <Meta>
+          <Stacks ref={stacksRef}>{t('home.headline')}</Stacks>
+          <Description ref={descRef}>{t('home.description')}</Description>
+          <CtaRow ref={ctaRef}>
+            <PrimaryCta href="#contato">{t('home.contactCta')}</PrimaryCta>
+            <SkipLink href="#sobre">{t('home.skipIntro')}</SkipLink>
+          </CtaRow>
+        </Meta>
       </motion.div>
 
       <motion.div
         style={{ opacity: indicatorOpacity }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
       >
-        <ScrollIndicator>
+        <ScrollIndicator ref={indicatorRef}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

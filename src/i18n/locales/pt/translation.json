@@ -6,7 +6,28 @@
   },
   "home": {
     "title": "Olá, eu sou o Eduardo 👋",
-    "description": "Desenvolvedor Front-end com foco em interfaces performáticas, acessíveis e com ótimo design. Vamos criar algo incrível juntos?"
+    "description": "Desenvolvedor Front-end com foco em interfaces performáticas, acessíveis e com ótimo design. Vamos criar algo incrível juntos?",
+    "headline": "Frontend & Mobile Engineer — React, React Native, TypeScript, Design Systems",
+    "contactCta": "Entre em contato",
+    "skipIntro": "Pular introdução",
+    "eyebrow": "Eduardo Oliveira · Portfólio",
+    "displayA": "FRONT-END",
+    "displayB": "ENGINEER &",
+    "displayC": "DESIGNER"
+  },
+  "identity": {
+    "code": "CODE.",
+    "create": "CREATE.",
+    "inspire": "INSPIRE.",
+    "scroll": "role para continuar",
+    "transitionTitle": "A IDEIA DANDO LUGAR AO TRABALHO",
+    "transitionText": "O que começou como código e criatividade agora toma forma em projetos reais. Cada linha escrita, cada decisão de design, cada problema resolvido. A inspiração não nasce do nada — ela é construída, linha por linha, projeto por projeto.",
+    "codeLine1": "Engenharia Front-end",
+    "codeLine2": "Design Systems & Código Limpo",
+    "createLine1": "Design",
+    "createLine2": "Movimento & Experiência",
+    "inspireLine1": "Propósito",
+    "inspireLine2": "Impacto & Legado"
   },
   "about": {
     "title": "sobre mim",

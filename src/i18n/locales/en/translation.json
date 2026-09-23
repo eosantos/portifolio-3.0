@@ -6,7 +6,28 @@
   },
   "home": {
     "title": "Hi, I'm Eduardo 👋",
-    "description": "Front-end developer focused on performant, accessible interfaces with great design. Shall we build something amazing together?"
+    "description": "Front-end developer focused on performant, accessible interfaces with great design. Shall we build something amazing together?",
+    "headline": "Frontend & Mobile Engineer — React, React Native, TypeScript, Design Systems",
+    "contactCta": "Get in touch",
+    "skipIntro": "Skip intro",
+    "eyebrow": "Eduardo Oliveira · Portfolio",
+    "displayA": "FRONT-END",
+    "displayB": "ENGINEER &",
+    "displayC": "DESIGNER"
+  },
+  "identity": {
+    "code": "CODE.",
+    "create": "CREATE.",
+    "inspire": "INSPIRE.",
+    "scroll": "scroll to continue",
+    "transitionTitle": "THE IDEA GIVING WAY TO THE WORK",
+    "transitionText": "What started as code and creativity now takes shape in real projects. Every line written, every design decision, every problem solved. Inspiration doesn't come from nowhere — it's built, line by line, project by project.",
+    "codeLine1": "Front-end Engineering",
+    "codeLine2": "Design Systems & Clean Code",
+    "createLine1": "Design",
+    "createLine2": "Motion & Experience",
+    "inspireLine1": "Purpose",
+    "inspireLine2": "Impact & Legacy"
   },
   "about": {
     "title": "about me",

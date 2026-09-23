@@ -82,6 +82,39 @@ vi.mock('framer-motion', async () => {
   return mockModule;
 });
 
+// Mock gsap: animations are no-ops in tests so content stays visible
+// and assertions cover structure/text/hrefs (animation is validated at runtime)
+vi.mock('gsap', () => {
+  const noopTimeline = () => {
+    const tl: Record<string, unknown> = {};
+    tl.to = vi.fn(() => tl);
+    tl.fromTo = vi.fn(() => tl);
+    tl.add = vi.fn(() => tl);
+    tl.set = vi.fn(() => tl);
+    return tl;
+  };
+  return {
+    gsap: {
+      context: vi.fn(() => ({ revert: vi.fn() })),
+      timeline: vi.fn(() => noopTimeline()),
+      set: vi.fn(),
+      to: vi.fn(),
+      fromTo: vi.fn(),
+      registerPlugin: vi.fn(),
+      matchMedia: vi.fn(() => ({ add: vi.fn(), revert: vi.fn() })),
+    },
+  };
+});
+
+vi.mock('gsap/ScrollTrigger', () => ({
+  ScrollTrigger: {
+    create: vi.fn(),
+    refresh: vi.fn(),
+    getAll: vi.fn(() => []),
+    kill: vi.fn(),
+  },
+}));
+
 // Mock react-icons
 vi.mock('react-icons/fi', () => ({
   FiMenu: ({ 'data-testid': testid = 'menu-icon' }) => (

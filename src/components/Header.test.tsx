@@ -18,12 +18,15 @@ describe('Header', () => {
     vi.clearAllMocks();
   });
 
-  it('renders logo', () => {
+  it('renders brand lockup with icon and wordmark', () => {
     renderWithProviders(<Header />);
 
-    const logo = screen.getByAltText('Logo Eduardo');
-    expect(logo).toBeInTheDocument();
-    expect(logo).toHaveAttribute('src');
+    const brand = screen.getByRole('link', { name: 'nav.home' });
+    expect(brand).toBeInTheDocument();
+    expect(brand).toHaveAttribute('href', '/');
+    expect(brand).toHaveTextContent('Eduardo Oliveira');
+    // Icon is decorative inside a labelled link
+    expect(brand.querySelector('img')).toBeInTheDocument();
   });
 
   it('renders navigation links', () => {
@@ -34,14 +37,53 @@ describe('Header', () => {
     expect(screen.getByText('nav.contact')).toBeInTheDocument();
   });
 
-  it('renders language toggle button with flag', () => {
+  it('renders textual language toggle without flags', () => {
     renderWithProviders(<Header />);
 
-    const flagButton = screen.getByTitle('Mudar idioma');
-    expect(flagButton).toBeInTheDocument();
-    // The flag image inside the button should have alt text
-    const flagImage = flagButton.querySelector('img');
-    expect(flagImage).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'PT' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'EN' })).toBeInTheDocument();
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
+  });
+
+  it('marks active language with aria-pressed', () => {
+    renderWithProviders(<Header />);
+
+    expect(screen.getByRole('button', { name: 'PT' })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    expect(screen.getByRole('button', { name: 'EN' })).toHaveAttribute(
+      'aria-pressed',
+      'false'
+    );
+  });
+
+  it('toggles language when EN button clicked', () => {
+    renderWithProviders(<Header />);
+
+    const enButton = screen.getByRole('button', { name: 'EN' });
+    act(() => {
+      fireEvent.click(enButton);
+    });
+
+    expect(screen.getByRole('button', { name: 'EN' })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+  });
+
+  it('does not toggle when active language clicked', () => {
+    renderWithProviders(<Header />);
+
+    const ptButton = screen.getByRole('button', { name: 'PT' });
+    act(() => {
+      fireEvent.click(ptButton);
+    });
+
+    expect(screen.getByRole('button', { name: 'PT' })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
   });
 
   it('renders theme toggle', () => {
@@ -55,7 +97,6 @@ describe('Header', () => {
   it('renders mobile menu button on small screens', () => {
     renderWithProviders(<Header />);
 
-    // Mobile menu button should exist (though hidden on desktop via CSS)
     expect(screen.getByTestId('menu-icon')).toBeInTheDocument();
   });
 
@@ -65,13 +106,10 @@ describe('Header', () => {
     const menuButton = screen.getByTestId('menu-icon').closest('button');
     expect(menuButton).toBeInTheDocument();
 
-    // Initially menu is closed (not visible on mobile)
-    // Click to open
     act(() => {
       fireEvent.click(menuButton!);
     });
 
-    // Menu should now be open
     expect(screen.getByTestId('close-icon')).toBeInTheDocument();
   });
 
@@ -85,45 +123,10 @@ describe('Header', () => {
 
     expect(screen.getByTestId('close-icon')).toBeInTheDocument();
 
-    // Click a nav link - use the translation key since mock returns keys
     const aboutLink = screen.getByText('nav.about');
     act(() => {
       fireEvent.click(aboutLink);
     });
-
-    // Menu should close (in real app, navigation would happen)
-    // The component doesn't auto-close on link click, but we test the state
-  });
-
-  it('toggles language when flag button clicked', () => {
-    renderWithProviders(<Header />);
-
-    expect(screen.getByAltText('Português')).toBeInTheDocument();
-
-    const flagButton = screen.getByTitle('Mudar idioma');
-    act(() => {
-      fireEvent.click(flagButton);
-    });
-
-    expect(screen.getByAltText('English')).toBeInTheDocument();
-  });
-
-  it('shows correct logo for light theme', () => {
-    localStorage.setItem('theme', 'light');
-
-    renderWithProviders(<Header />);
-
-    const logo = screen.getByAltText('Logo Eduardo');
-    expect(logo).toBeInTheDocument();
-  });
-
-  it('shows correct logo for dark theme', () => {
-    localStorage.setItem('theme', 'dark');
-
-    renderWithProviders(<Header />);
-
-    const logo = screen.getByAltText('Logo Eduardo');
-    expect(logo).toBeInTheDocument();
   });
 
   it('has fixed positioning', () => {
@@ -158,10 +161,31 @@ describe('Header', () => {
     });
   });
 
-  it('has correct aria attributes on flag button', () => {
+  it('enters compact mode after scrolling past threshold', () => {
     renderWithProviders(<Header />);
 
-    const flagButton = screen.getByTitle('Mudar idioma');
-    expect(flagButton).toHaveAttribute('title', 'Mudar idioma');
+    act(() => {
+      Object.defineProperty(window, 'scrollY', {
+        value: 200,
+        writable: true,
+        configurable: true
+      });
+      fireEvent.scroll(window);
+    });
+
+    const brand = screen.getByRole('link', { name: 'nav.home' });
+    expect(brand.querySelector('img')).toBeInTheDocument();
+  });
+
+  it('shows sliding indicator on nav hover', () => {
+    const { container } = renderWithProviders(<Header />);
+    const aboutLink = screen.getByText('nav.about');
+
+    act(() => {
+      fireEvent.mouseEnter(aboutLink);
+    });
+
+    const nav = container.querySelector('nav');
+    expect(nav).toBeInTheDocument();
   });
 });

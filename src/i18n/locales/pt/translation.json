@@ -2,7 +2,8 @@
   "nav": {
     "about": "Sobre",
     "projects": "Projetos",
-    "contact": "Contato"
+    "contact": "Contato",
+    "home": "Início"
   },
   "home": {
     "title": "Olá, eu sou o Eduardo 👋",

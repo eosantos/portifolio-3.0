@@ -6,7 +6,7 @@ import { useLanguage } from '@/providers/LanguageProvider';
 import { media } from '@/styles/media';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiMenu, FiX } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
@@ -19,7 +19,7 @@ const HeaderContainer = styled(motion.header)`
   z-index: 99;
   background-color: ${({ theme }) => theme.background};
   border-bottom: 1px solid ${({ theme }) => theme.currentline};
-  padding: 1rem 2rem;
+  padding: 0.875rem 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,85 +32,174 @@ const HeaderInner = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 
   ${media.greaterThan('md')} {
     padding: 0 2rem;
   }
 `;
 
-const LeftSection = styled.div`
-  display: flex;
+const BrandLink = styled(Link)`
+  display: inline-flex;
   align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  line-height: 1;
+  flex-shrink: 0;
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.purple};
+    outline-offset: 4px;
+    border-radius: 6px;
+  }
 `;
 
-const CenterSection = styled.nav<{ $isOpen: boolean }>`
+const BrandWordmark = styled.span<{ $compact: boolean }>`
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: ${({ theme }) => theme.text};
+  white-space: nowrap;
+  max-width: ${({ $compact }) => ($compact ? '0' : '12rem')};
+  opacity: ${({ $compact }) => ($compact ? 0 : 1)};
+  overflow: hidden;
+  transition:
+    max-width 0.3s ease,
+    opacity 0.25s ease;
+
+  ${media.lessThan('md')} {
+    display: none;
+  }
+`;
+
+const BrandDot = styled.span`
+  color: ${({ theme }) => theme.purple};
+`;
+
+const NavPill = styled.nav<{ $isOpen: boolean }>`
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
 
   a {
     position: relative;
+    z-index: 1;
     text-decoration: none;
     color: ${({ theme }) => theme.text};
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    padding: 0.25rem 0;
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 2px;
-      background: ${({ theme }) => theme.purple};
-      border-radius: 1px;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.25s ease;
-    }
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    transition: color 0.2s ease;
 
     &:hover {
       color: ${({ theme }) => theme.purple};
     }
 
-    &:hover::after {
-      transform: scaleX(1);
-    }
-
     &:focus-visible {
       outline: 2px solid ${({ theme }) => theme.purple};
-      outline-offset: 4px;
-      border-radius: 2px;
+      outline-offset: 2px;
     }
   }
 
   ${media.lessThan('md')} {
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+    top: calc(100% + 0.5rem);
+    left: 1rem;
+    right: 1rem;
     background-color: ${({ theme }) => theme.background};
+    border: 1px solid ${({ theme }) => theme.currentline};
+    border-radius: 16px;
     flex-direction: column;
-    padding: 1rem;
+    align-items: stretch;
+    padding: 0.5rem;
+    gap: 0.25rem;
     display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
-    max-width: 75%;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    max-width: none;
+
+    a {
+      padding: 0.75rem 1rem;
+    }
+  }
+`;
+
+const NavIndicator = styled.span<{
+  $left: number;
+  $width: number;
+  $visible: boolean;
+}>`
+  position: absolute;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  left: ${({ $left }) => `${$left}px`};
+  width: ${({ $width }) => `${$width}px`};
+  border-radius: 999px;
+  background: ${({ theme }) => theme.currentline};
+  opacity: ${({ $visible }) => ($visible ? 0.55 : 0)};
+  transition:
+    left 0.25s ease,
+    width 0.25s ease,
+    opacity 0.2s ease;
+  pointer-events: none;
+
+  ${media.lessThan('md')} {
+    display: none;
   }
 `;
 
 const RightSection = styled.div`
   display: flex;
-  align-items: start;
-  gap: 1rem;
+  align-items: center;
+  gap: 0.875rem;
   flex-shrink: 0;
-  margin-right: 5rem;
+`;
 
-  ${media.lessThan('md')} {
-    justify-content: flex-end;
-    width: auto;
+const LangGroup = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+`;
+
+const LangButton = styled.button<{ $active: boolean }>`
+  background: none;
+  border: none;
+  padding: 0.25rem 0.125rem;
+  cursor: pointer;
+  font: inherit;
+  color: ${({ theme, $active }) => ($active ? theme.text : theme.comment)};
+  opacity: ${({ $active }) => ($active ? 1 : 0.75)};
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover {
+    color: ${({ theme }) => theme.text};
+    opacity: 1;
   }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.purple};
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+`;
+
+const LangSeparator = styled.span`
+  color: ${({ theme }) => theme.comment};
+  opacity: 0.6;
+  user-select: none;
 `;
 
 const MobileMenuButton = styled.button`
@@ -119,23 +208,29 @@ const MobileMenuButton = styled.button`
   border: none;
   color: ${({ theme }) => theme.text};
   font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0.25rem;
 
   ${media.lessThan('md')} {
-    display: block;
+    display: inline-flex;
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.purple};
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 `;
 
-const FlagButton = styled.button`
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-`;
+const NAV_LINKS = [
+  { href: '#sobre', key: 'about' },
+  { href: '#projetos', key: 'projects' },
+  { href: '#contato', key: 'contact' }
+] as const;
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [compact, setCompact] = useState(false);
   const theme = useTheme();
   const { lang, toggleLanguage } = useLanguage();
   const { t } = useTranslation();
@@ -144,11 +239,51 @@ export default function Header() {
 
   const logoSrc =
     theme.title === 'light'
-      ? '/assets/icons/logo-white.svg'
-      : '/assets/icons/logo-black.svg';
+      ? '/assets/icons/logo-black.svg'
+      : '/assets/icons/logo-white.svg';
 
-  const flagSrc =
-    lang === 'pt' ? '/assets/flags/br.svg' : '/assets/flags/us.svg';
+  const navRef = useRef<HTMLElement | null>(null);
+  const linkRefs = useRef<Array<HTMLAnchorElement | null>>([]);
+  const [indicator, setIndicator] = useState({
+    left: 0,
+    width: 0,
+    visible: false
+  });
+
+  const updateIndicator = (index: number | null) => {
+    if (index === null || typeof window === 'undefined') {
+      setIndicator((prev) => ({ ...prev, visible: false }));
+      return;
+    }
+    if (!window.matchMedia('(min-width: 768px)').matches) return;
+    const link = linkRefs.current[index];
+    const nav = navRef.current;
+    if (!link || !nav) return;
+    const navRect = nav.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    setIndicator({
+      left: linkRect.left - navRect.left,
+      width: linkRect.width,
+      visible: true
+    });
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIndicator((prev) => ({ ...prev, visible: false }));
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setCompact(window.scrollY > 120);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Create derived MotionValues for complex transformations
   const backgroundColor = useTransform(backgroundOpacity, (o: number) => {
@@ -178,36 +313,76 @@ export default function Header() {
       }}
     >
       <HeaderInner>
-        <LeftSection>
-          <Link href="/">
-            <Image
-              src={logoSrc}
-              alt="Logo Eduardo"
-              width={140}
-              height={40}
-              priority
-            />
-          </Link>
-        </LeftSection>
+        <BrandLink href="/" aria-label={t('nav.home')}>
+          <Image
+            src={logoSrc}
+            alt=""
+            aria-hidden="true"
+            width={36}
+            height={36}
+            priority
+          />
+          <BrandWordmark $compact={compact}>
+            Eduardo Oliveira<BrandDot aria-hidden="true">.</BrandDot>
+          </BrandWordmark>
+        </BrandLink>
 
-        <CenterSection $isOpen={isOpen}>
-          <Link href="#sobre">{t('nav.about')}</Link>
-          <Link href="#projetos">{t('nav.projects')}</Link>
-          <Link href="#contato">{t('nav.contact')}</Link>
-        </CenterSection>
+        <NavPill
+          ref={navRef}
+          $isOpen={isOpen}
+          onMouseLeave={() => updateIndicator(null)}
+        >
+          <NavIndicator
+            aria-hidden="true"
+            $left={indicator.left}
+            $width={indicator.width}
+            $visible={indicator.visible}
+          />
+          {NAV_LINKS.map((link, index) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              ref={(el) => {
+                linkRefs.current[index] = el;
+              }}
+              onMouseEnter={() => updateIndicator(index)}
+              onFocus={() => updateIndicator(index)}
+              onBlur={() => updateIndicator(null)}
+              onClick={() => setIsOpen(false)}
+            >
+              {t(`nav.${link.key}`)}
+            </Link>
+          ))}
+        </NavPill>
 
         <RightSection>
-          <FlagButton onClick={toggleLanguage} title="Mudar idioma">
-            <Image
-              src={flagSrc}
-              alt={lang === 'pt' ? 'Português' : 'English'}
-              width={24}
-              height={24}
-              priority
-            />
-          </FlagButton>
+          <LangGroup role="group" aria-label="Language / Idioma">
+            <LangButton
+              $active={lang === 'pt'}
+              aria-pressed={lang === 'pt'}
+              onClick={() => {
+                if (lang !== 'pt') toggleLanguage();
+              }}
+            >
+              PT
+            </LangButton>
+            <LangSeparator aria-hidden="true">·</LangSeparator>
+            <LangButton
+              $active={lang === 'en'}
+              aria-pressed={lang === 'en'}
+              onClick={() => {
+                if (lang !== 'en') toggleLanguage();
+              }}
+            >
+              EN
+            </LangButton>
+          </LangGroup>
           <ThemeToggle />
-          <MobileMenuButton onClick={() => setIsOpen(!isOpen)}>
+          <MobileMenuButton
+            onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-label="Menu"
+          >
             {isOpen ? <FiX /> : <FiMenu />}
           </MobileMenuButton>
         </RightSection>

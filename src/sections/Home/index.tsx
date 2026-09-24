@@ -10,7 +10,8 @@ import styled from 'styled-components';
 const Container = styled.section`
   position: relative;
   z-index: 10;
-  padding: clamp(2.25rem, 4vh, 4rem) 2rem clamp(2rem, 5vh, 3.5rem)
+  padding: clamp(4.5rem, 9vh, 6rem) 2rem clamp(2rem, 5vh, 3.5rem);
+  max-width: 1280px;
   margin: 0 auto;
   min-height: 100vh;
   min-height: 100dvh;

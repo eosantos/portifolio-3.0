@@ -38,5 +38,3 @@ export const darkTheme = {
   red: '#ff5555',
   yellow: '#f1fa8c'
 };
-
-export type ThemeType = typeof lightTheme;

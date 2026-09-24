@@ -285,12 +285,30 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Parse theme hex color (#rrggbb) into rgb channels so the
+  // scroll-driven background is always a valid rgba string.
+  // (The previous /\d+/g parsing produced invalid values like
+  // rgba(282, 36, undefined, …) which browsers ignore, leaving an
+  // opaque background that hides the backdrop blur.)
+  const hexToRgb = (hex: string): [number, number, number] => {
+    const clean = hex.replace('#', '');
+    const full =
+      clean.length === 3
+        ? clean
+            .split('')
+            .map((c) => c + c)
+            .join('')
+        : clean;
+    const num = parseInt(full, 16);
+    return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+  };
+  const [br, bgc, bb] = hexToRgb(theme.background);
+
   // Create derived MotionValues for complex transformations
-  const backgroundColor = useTransform(backgroundOpacity, (o: number) => {
-    const bg = theme.background;
-    const [r, g, b] = bg.match(/\d+/g)?.map(Number) || [248, 248, 242];
-    return `rgba(${r}, ${g}, ${b}, ${o})`;
-  });
+  const backgroundColor = useTransform(
+    backgroundOpacity,
+    (o: number) => `rgba(${br}, ${bgc}, ${bb}, ${o})`
+  );
 
   const backdropFilter = useTransform(
     backdropBlur,
@@ -307,6 +325,7 @@ export default function Header() {
       style={{
         backgroundColor,
         backdropFilter,
+        WebkitBackdropFilter: backdropFilter,
         borderBottomColor: borderColor,
         transform: headerScale,
         transformOrigin: 'top'

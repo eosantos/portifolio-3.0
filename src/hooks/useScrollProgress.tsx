@@ -9,7 +9,7 @@ import {
 } from 'react';
 import { useScroll, useTransform, MotionValue } from 'framer-motion';
 
-export interface ScrollProgressContextValue {
+interface ScrollProgressContextValue {
   scrollY: MotionValue<number>;
   scrollYProgress: MotionValue<number>;
   heroProgress: MotionValue<number>;
@@ -83,11 +83,6 @@ export function useScrollProgress() {
     );
   }
   return context;
-}
-
-export function useHeroProgress() {
-  const { heroProgress, isReducedMotion } = useScrollProgress();
-  return { heroProgress, isReducedMotion };
 }
 
 export function useScrollYProgress() {

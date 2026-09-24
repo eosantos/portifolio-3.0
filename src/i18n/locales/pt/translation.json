@@ -34,12 +34,12 @@
     "inspireLine2": "Impacto & Legado"
   },
   "about": {
-    "title": "sobre mim",
-    "subtitle": "quem eu sou",
-    "paragraph0": "Meu nome é <strong>Eduardo Oliveira</strong>.",
-    "paragraph1": "Sou desenvolvedor <strong>front-end</strong> com sólida experiência em <strong>ReactJS</strong>, <strong>JavaScript</strong> e <strong>TypeScript</strong>, e atualmente focado em projetos com <strong>Next.js</strong>. Tenho paixão por criar interfaces responsivas e intuitivas, buscando sempre a melhor experiência de usuário. Utilizo ferramentas como <strong>Styled-Components</strong> e <strong>SASS</strong> para layouts modernos e funcionais.",
-    "paragraph2": "Minha experiência inclui <strong>Redux</strong> para state management, <strong>Axios</strong> para requisições HTTP e recursos do <strong>Next.js</strong> como API Routes e SSR. Também trabalho com <strong>NodeJS</strong>, <strong>Bootstrap</strong>, <strong>MUI</strong>, <strong>Jest</strong>, <strong>Cypress</strong>, <strong>SQL</strong> e <strong>Docker</strong>. Utilizo <strong>Figma</strong> para wireframes e protótipos.",
-    "paragraph3": "Tenho conhecimentos em arquitetura de software e metodologias ágeis (Scrum, Kanban) e estudo <strong>Node.js</strong> para me tornar full-stack. Estou aberto a oportunidades e desafios empolgantes na indústria de tecnologia. Sinta-se à vontade para entrar em contato!"
+    "quote": "Tecnologia é meio, não fim: meu foco é resolver problemas reais de negócio com boa experiência de usuário.",
+    "body1": "Há mais de 8 anos desenvolvendo produtos web e mobile com React, React Native e TypeScript — já passei por projetos em varejo (Magalu), turismo, fintech (EqSeed, Finnet) e e-commerce internacional (Samsung América Latina, via Trinto | Digital Partners).",
+    "body2": "Também dedico parte da minha carreira à mentoria técnica — gosto de contribuir para o crescimento de outros desenvolvedores tanto quanto para o código em si.",
+    "tag1": "8+ anos de experiência",
+    "tag2": "Front-end & Mobile",
+    "tag3": "Web, mobile e fintech"
   },
   "projects": {
     "title": "meus projetos",

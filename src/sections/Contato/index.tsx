@@ -321,30 +321,30 @@ export default function ContatoSection() {
       <ContactGrid>
         <InfoCard>
           <InfoItem
-            href="mailto:eduardo@dudev.com.br"
+            href="mailto:eos.eduardooliveira@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FiMail size={20} />
-            <span>eduardo@dudev.com.br</span>
+            <span>eos.eduardooliveira@gmail.com</span>
           </InfoItem>
 
           <InfoItem
-            href="https://github.com/eduaedooliveira"
+            href="https://github.com/eosantos"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FiGithub size={20} />
-            <span>github.com/eduaedooliveira</span>
+            <span>github.com/eosantos</span>
           </InfoItem>
 
           <InfoItem
-            href="https://linkedin.com/in/eduaedooliveira"
+            href="https://www.linkedin.com/in/eduardo-oliveira-dev/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FiLinkedin size={20} />
-            <span>linkedin.com/in/eduaedooliveira</span>
+            <span>www.linkedin.com/in/eduardo-oliveira-dev</span>
           </InfoItem>
         </InfoCard>
 

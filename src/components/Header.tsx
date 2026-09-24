@@ -15,7 +15,9 @@ import { useHeaderScroll } from '@/hooks/useHeaderScroll';
 const HeaderContainer = styled(motion.header)`
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
+  box-sizing: border-box;
   z-index: 99;
   background-color: ${({ theme }) => theme.background};
   border-bottom: 1px solid ${({ theme }) => theme.currentline};

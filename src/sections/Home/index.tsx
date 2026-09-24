@@ -73,6 +73,13 @@ const StatusBadge = styled.p`
   text-transform: uppercase;
   color: ${({ theme }) => theme.text};
   white-space: nowrap;
+  max-width: 100%;
+
+  ${media.lessThan('md')} {
+    white-space: normal;
+    line-height: 1.5;
+    border-radius: 16px;
+  }
 `;
 
 const StatusDot = styled.span`

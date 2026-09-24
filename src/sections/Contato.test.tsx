@@ -45,10 +45,12 @@ describe('ContatoSection', () => {
 
   it('renders contact info links', () => {
     renderWithProviders(<Contato />);
-    expect(screen.getByText('eduardo@dudev.com.br')).toBeInTheDocument();
-    expect(screen.getByText('github.com/eduaedooliveira')).toBeInTheDocument();
     expect(
-      screen.getByText('linkedin.com/in/eduaedooliveira')
+      screen.getByText('eos.eduardooliveira@gmail.com')
+    ).toBeInTheDocument();
+    expect(screen.getByText('github.com/eosantos')).toBeInTheDocument();
+    expect(
+      screen.getByText('www.linkedin.com/in/eduardo-oliveira-dev')
     ).toBeInTheDocument();
   });
 
@@ -213,7 +215,9 @@ describe('ContatoSection', () => {
 
   it('contact links open in new tab', () => {
     renderWithProviders(<Contato />);
-    const emailLink = screen.getByText('eduardo@dudev.com.br').closest('a');
+    const emailLink = screen
+      .getByText('eos.eduardooliveira@gmail.com')
+      .closest('a');
     expect(emailLink).toHaveAttribute('target', '_blank');
     expect(emailLink).toHaveAttribute('rel', 'noopener noreferrer');
   });

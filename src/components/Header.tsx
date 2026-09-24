@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { FiMenu, FiX } from 'react-icons/fi';
 import styled, { useTheme } from 'styled-components';
 import { useHeaderScroll } from '@/hooks/useHeaderScroll';
+import { scrollToSection } from '@/utils/scrollToSection';
 
 const HeaderContainer = styled(motion.header)`
   position: fixed;
@@ -251,10 +252,14 @@ export default function Header() {
     width: 0,
     visible: false
   });
+  const [hoveredLink, setHoveredLink] = useState<number | null>(null);
+  const [activeLink, setActiveLink] = useState<number | null>(null);
 
   const updateIndicator = (index: number | null) => {
     if (index === null || typeof window === 'undefined') {
-      setIndicator((prev) => ({ ...prev, visible: false }));
+      setIndicator((prev) =>
+        prev.visible ? { ...prev, visible: false } : prev
+      );
       return;
     }
     if (!window.matchMedia('(min-width: 768px)').matches) return;
@@ -263,20 +268,61 @@ export default function Header() {
     if (!link || !nav) return;
     const navRect = nav.getBoundingClientRect();
     const linkRect = link.getBoundingClientRect();
-    setIndicator({
+    const next = {
       left: linkRect.left - navRect.left,
       width: linkRect.width,
       visible: true
-    });
+    };
+    setIndicator((prev) =>
+      prev.left === next.left &&
+      prev.width === next.width &&
+      prev.visible === next.visible
+        ? prev
+        : next
+    );
   };
+
+  // Indicator follows hover, falling back to the scroll-spy active section.
+  useEffect(() => {
+    updateIndicator(hoveredLink ?? activeLink);
+  }, [hoveredLink, activeLink]);
 
   useEffect(() => {
     const handleResize = () => {
-      setIndicator((prev) => ({ ...prev, visible: false }));
+      setHoveredLink(null);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Scroll-spy: highlight the section currently crossing the viewport middle.
+  useEffect(() => {
+    if (typeof IntersectionObserver === 'undefined') return;
+    const ids = ['sobre', 'projetos', 'contato'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = ids.indexOf(entry.target.id);
+            if (idx >= 0) setActiveLink(idx);
+          }
+        });
+      },
+      { rootMargin: '-45% 0px -45% 0px' }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const handleNavClick = (e: React.MouseEvent, index: number, id: string) => {
+    e.preventDefault();
+    setActiveLink(index);
+    setIsOpen(false);
+    scrollToSection(id);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -351,7 +397,7 @@ export default function Header() {
         <NavPill
           ref={navRef}
           $isOpen={isOpen}
-          onMouseLeave={() => updateIndicator(null)}
+          onMouseLeave={() => setHoveredLink(null)}
         >
           <NavIndicator
             aria-hidden="true"
@@ -366,10 +412,12 @@ export default function Header() {
               ref={(el) => {
                 linkRefs.current[index] = el;
               }}
-              onMouseEnter={() => updateIndicator(index)}
-              onFocus={() => updateIndicator(index)}
-              onBlur={() => updateIndicator(null)}
-              onClick={() => setIsOpen(false)}
+              onMouseEnter={() => setHoveredLink(index)}
+              onFocus={() => setHoveredLink(index)}
+              onBlur={() => setHoveredLink(null)}
+              onClick={(e) =>
+                handleNavClick(e, index, link.href.replace('#', ''))
+              }
             >
               {t(`nav.${link.key}`)}
             </Link>

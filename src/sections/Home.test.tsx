@@ -1,8 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { LanguageProvider } from '@/providers/LanguageProvider';
 import { ScrollProgressProvider } from '@/hooks/useScrollProgress';
+import { scrollToSection } from '@/utils/scrollToSection';
 import Home from '@/sections/Home';
+
+vi.mock('@/utils/scrollToSection', () => ({
+  scrollToSection: vi.fn()
+}));
 
 const renderWithProviders = (component: React.ReactNode) => {
   return render(
@@ -56,6 +61,24 @@ describe('HomeSection', () => {
     const skip = screen.getByRole('link', { name: 'home.skipIntro' });
     expect(skip).toBeInTheDocument();
     expect(skip).toHaveAttribute('href', '#sobre');
+  });
+
+  it('smooth-scrolls when skip link clicked', () => {
+    renderWithProviders(<Home />);
+    const skip = screen.getByRole('link', { name: 'home.skipIntro' });
+    act(() => {
+      fireEvent.click(skip);
+    });
+    expect(scrollToSection).toHaveBeenCalledWith('sobre');
+  });
+
+  it('smooth-scrolls when contact CTA clicked', () => {
+    renderWithProviders(<Home />);
+    const cta = screen.getByRole('link', { name: 'home.contactCta' });
+    act(() => {
+      fireEvent.click(cta);
+    });
+    expect(scrollToSection).toHaveBeenCalledWith('contato');
   });
 
   it('has correct container styling', () => {

@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { gsap } from 'gsap';
 import { media } from '@/styles/media';
+import { scrollToSection } from '@/utils/scrollToSection';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -401,6 +402,11 @@ export default function HomeSection() {
   const asideOpacity = useTransform(heroProgress, [0, 0.45], [1, 0]);
   const asideY = useTransform(heroProgress, [0, 1], [0, 30]);
 
+  const handleCtaClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    scrollToSection(id);
+  };
+
   if (isReducedMotion) {
     return (
       <Container id="home">
@@ -415,8 +421,18 @@ export default function HomeSection() {
             <Stacks>{t('home.headline')}</Stacks>
             <Description>{t('home.description')}</Description>
             <CtaRow>
-              <PrimaryCta href="#contato">{t('home.contactCta')}</PrimaryCta>
-              <SkipLink href="#sobre">{t('home.skipIntro')}</SkipLink>
+              <PrimaryCta
+                href="#contato"
+                onClick={(e) => handleCtaClick(e, 'contato')}
+              >
+                {t('home.contactCta')}
+              </PrimaryCta>
+              <SkipLink
+                href="#sobre"
+                onClick={(e) => handleCtaClick(e, 'sobre')}
+              >
+                {t('home.skipIntro')}
+              </SkipLink>
             </CtaRow>
           </Meta>
         </HeroMain>
@@ -494,8 +510,18 @@ export default function HomeSection() {
             <Stacks ref={stacksRef}>{t('home.headline')}</Stacks>
             <Description ref={descRef}>{t('home.description')}</Description>
             <CtaRow ref={ctaRef}>
-              <PrimaryCta href="#contato">{t('home.contactCta')}</PrimaryCta>
-              <SkipLink href="#sobre">{t('home.skipIntro')}</SkipLink>
+              <PrimaryCta
+                href="#contato"
+                onClick={(e) => handleCtaClick(e, 'contato')}
+              >
+                {t('home.contactCta')}
+              </PrimaryCta>
+              <SkipLink
+                href="#sobre"
+                onClick={(e) => handleCtaClick(e, 'sobre')}
+              >
+                {t('home.skipIntro')}
+              </SkipLink>
             </CtaRow>
           </Meta>
         </motion.div>

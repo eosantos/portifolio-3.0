@@ -1,7 +1,12 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { LanguageProvider } from '@/providers/LanguageProvider';
+import { scrollToSection } from '@/utils/scrollToSection';
 import Header from './Header';
+
+vi.mock('@/utils/scrollToSection', () => ({
+  scrollToSection: vi.fn()
+}));
 
 const renderWithProviders = (component: React.ReactNode) => {
   return render(
@@ -175,6 +180,28 @@ describe('Header', () => {
 
     const brand = screen.getByRole('link', { name: 'nav.home' });
     expect(brand.querySelector('img')).toBeInTheDocument();
+  });
+
+  it('smooth-scrolls to section when nav link clicked', () => {
+    renderWithProviders(<Header />);
+
+    const aboutLink = screen.getByText('nav.about');
+    act(() => {
+      fireEvent.click(aboutLink);
+    });
+
+    expect(scrollToSection).toHaveBeenCalledWith('sobre');
+  });
+
+  it('smooth-scrolls from any scroll position', () => {
+    renderWithProviders(<Header />);
+
+    const contactLink = screen.getByText('nav.contact');
+    act(() => {
+      fireEvent.click(contactLink);
+    });
+
+    expect(scrollToSection).toHaveBeenCalledWith('contato');
   });
 
   it('shows sliding indicator on nav hover', () => {

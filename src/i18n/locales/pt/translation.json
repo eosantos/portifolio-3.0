@@ -22,16 +22,7 @@
   "identity": {
     "code": "CODE.",
     "create": "CREATE.",
-    "inspire": "INSPIRE.",
-    "scroll": "role para continuar",
-    "transitionTitle": "A IDEIA DANDO LUGAR AO TRABALHO",
-    "transitionText": "O que começou como código e criatividade agora toma forma em projetos reais. Cada linha escrita, cada decisão de design, cada problema resolvido. A inspiração não nasce do nada — ela é construída, linha por linha, projeto por projeto.",
-    "codeLine1": "Engenharia Front-end",
-    "codeLine2": "Design Systems & Código Limpo",
-    "createLine1": "Design",
-    "createLine2": "Movimento & Experiência",
-    "inspireLine1": "Propósito",
-    "inspireLine2": "Impacto & Legado"
+    "inspire": "INSPIRE."
   },
   "about": {
     "quote": "Tecnologia é meio, não fim: meu foco é resolver problemas reais de negócio com boa experiência de usuário.",
@@ -63,5 +54,9 @@
     "reset": "Limpar",
     "success": "Mensagem enviada com sucesso! Entrarei em contato em breve.",
     "error": "Erro ao enviar mensagem. Tente novamente ou envie um e-mail diretamente."
+  },
+  "manifesto": {
+    "label": "Manifesto",
+    "tagline": "Código com propósito, criado para gerar impacto real."
   }
 }

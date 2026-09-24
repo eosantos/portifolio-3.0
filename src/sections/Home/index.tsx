@@ -10,21 +10,122 @@ import styled from 'styled-components';
 const Container = styled.section`
   position: relative;
   z-index: 10;
-  padding: clamp(4.5rem, 9vh, 6rem) 2rem clamp(2rem, 5vh, 3.5rem);
-  max-width: 1280px;
+  padding: clamp(2.25rem, 4vh, 4rem) 2rem clamp(2rem, 5vh, 3.5rem)
   margin: 0 auto;
-  height: 100vh;
-  height: 100dvh;
-  min-height: 560px;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  overflow: hidden;
+  justify-content: center;
   will-change: transform, opacity;
 
   ${media.greaterThan('md')} {
     padding-left: 4rem;
     padding-right: 4rem;
+  }
+
+  ${media.greaterThan('lg')} {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 600px;
+    flex-direction: row;
+    align-items: center;
+    gap: 4rem;
+    overflow: hidden;
+  }
+`;
+
+const HeroMain = styled.div`
+  flex: 1 1 auto;
+  min-width: 0;
+`;
+
+const HeroAside = styled.aside`
+  margin-top: 2.5rem;
+  max-width: 420px;
+  will-change: transform, opacity;
+
+  ${media.greaterThan('lg')} {
+    margin-top: 0;
+    flex: 0 0 300px;
+    align-self: center;
+    border-left: 1px solid ${({ theme }) => theme.currentline};
+    padding-left: 2rem;
+  }
+
+  @media (max-height: 750px) {
+    margin-top: 1.5rem;
+  }
+`;
+
+const StatusBadge = styled.p`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin: 0 0 1.25rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid ${({ theme }) => theme.currentline};
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.text};
+  white-space: nowrap;
+`;
+
+const StatusDot = styled.span`
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: ${({ theme }) => theme.purple};
+  flex-shrink: 0;
+  animation: pulse 2.4s ease-in-out infinite;
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow: 0 0 0 0 ${({ theme }) => theme.purple}66;
+    }
+    50% {
+      opacity: 0.7;
+      box-shadow: 0 0 0 6px transparent;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`;
+
+const HighlightsList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+`;
+
+const HighlightsItem = styled.li`
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: ${({ theme }) => theme.text};
+  line-height: 1.5;
+
+  &::before {
+    content: '—';
+    color: ${({ theme }) => theme.comment};
+    flex-shrink: 0;
+  }
+
+  ${media.greaterThan('md')} {
+    font-size: 1rem;
   }
 `;
 
@@ -218,6 +319,7 @@ export default function HomeSection() {
   const stacksRef = useRef<HTMLParagraphElement | null>(null);
   const descRef = useRef<HTMLParagraphElement | null>(null);
   const ctaRef = useRef<HTMLDivElement | null>(null);
+  const asideRef = useRef<HTMLElement | null>(null);
   const indicatorRef = useRef<HTMLDivElement | null>(null);
 
   // Entrance timeline: runs once on mount (not scroll-driven, not repeated).
@@ -232,6 +334,7 @@ export default function HomeSection() {
       stacksRef.current,
       descRef.current,
       ctaRef.current,
+      asideRef.current,
       indicatorRef.current
     ].filter((el): el is HTMLElement => el !== null);
     if (targets.length === 0) return;
@@ -239,10 +342,13 @@ export default function HomeSection() {
     const ctx = gsap.context(() => {
       gsap.set(eyebrowRef.current, { autoAlpha: 0, y: 16 });
       gsap.set(lineRefs.current, { yPercent: 110 });
-      gsap.set([stacksRef.current, descRef.current, ctaRef.current], {
-        autoAlpha: 0,
-        y: 24
-      });
+      gsap.set(
+        [stacksRef.current, descRef.current, ctaRef.current, asideRef.current],
+        {
+          autoAlpha: 0,
+          y: 24
+        }
+      );
       gsap.set(indicatorRef.current, { autoAlpha: 0 });
 
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -255,6 +361,7 @@ export default function HomeSection() {
         .to(stacksRef.current, { autoAlpha: 1, y: 0, duration: 0.45 }, 0.55)
         .to(descRef.current, { autoAlpha: 1, y: 0, duration: 0.45 }, 0.65)
         .to(ctaRef.current, { autoAlpha: 1, y: 0, duration: 0.45 }, 0.75)
+        .to(asideRef.current, { autoAlpha: 1, y: 0, duration: 0.45 }, 0.8)
         .to(indicatorRef.current, { autoAlpha: 1, duration: 0.4 }, 0.9);
     });
 
@@ -282,89 +389,125 @@ export default function HomeSection() {
   // Indicator fades immediately
   const indicatorOpacity = useTransform(heroProgress, [0, 0.2], [1, 0]);
 
+  // Aside drifts with the scene, slightly slower than the main block
+  const asideOpacity = useTransform(heroProgress, [0, 0.45], [1, 0]);
+  const asideY = useTransform(heroProgress, [0, 1], [0, 30]);
+
   if (isReducedMotion) {
     return (
       <Container id="home">
-        <Eyebrow>{t('home.eyebrow')}</Eyebrow>
-        <Display>
-          <DisplayLine>{t('home.displayA')}</DisplayLine>
-          <DisplayLine>{t('home.displayB')}</DisplayLine>
-          <DisplayLine>{t('home.displayC')}</DisplayLine>
-        </Display>
-        <Meta>
-          <Stacks>{t('home.headline')}</Stacks>
-          <Description>{t('home.description')}</Description>
-          <CtaRow>
-            <PrimaryCta href="#contato">{t('home.contactCta')}</PrimaryCta>
-            <SkipLink href="#sobre">{t('home.skipIntro')}</SkipLink>
-          </CtaRow>
-        </Meta>
+        <HeroMain>
+          <Eyebrow>{t('home.eyebrow')}</Eyebrow>
+          <Display>
+            <DisplayLine>{t('home.displayA')}</DisplayLine>
+            <DisplayLine>{t('home.displayB')}</DisplayLine>
+            <DisplayLine>{t('home.displayC')}</DisplayLine>
+          </Display>
+          <Meta>
+            <Stacks>{t('home.headline')}</Stacks>
+            <Description>{t('home.description')}</Description>
+            <CtaRow>
+              <PrimaryCta href="#contato">{t('home.contactCta')}</PrimaryCta>
+              <SkipLink href="#sobre">{t('home.skipIntro')}</SkipLink>
+            </CtaRow>
+          </Meta>
+        </HeroMain>
+        <HeroAside aria-label={t('home.statusBadge')}>
+          <StatusBadge>
+            <StatusDot aria-hidden="true" />
+            {t('home.statusBadge')}
+          </StatusBadge>
+          <HighlightsList>
+            <HighlightsItem>{t('home.highlight1')}</HighlightsItem>
+            <HighlightsItem>{t('home.highlight2')}</HighlightsItem>
+            <HighlightsItem>{t('home.highlight3')}</HighlightsItem>
+          </HighlightsList>
+        </HeroAside>
       </Container>
     );
   }
 
   return (
     <Container id="home">
-      <motion.div style={{ opacity: eyebrowOpacity }}>
-        <Eyebrow ref={eyebrowRef}>{t('home.eyebrow')}</Eyebrow>
-      </motion.div>
+      <HeroMain>
+        <motion.div style={{ opacity: eyebrowOpacity }}>
+          <Eyebrow ref={eyebrowRef}>{t('home.eyebrow')}</Eyebrow>
+        </motion.div>
 
-      <Display
-        aria-label={`${t('home.displayA')} ${t('home.displayB')} ${t('home.displayC')}`}
-      >
-        <DisplayLine
-          aria-hidden="true"
-          ref={(el) => {
-            lineRefs.current[0] = el;
-          }}
+        <Display
+          aria-label={`${t('home.displayA')} ${t('home.displayB')} ${t('home.displayC')}`}
         >
-          <motion.span
-            style={{ y: lineAY, opacity: displayOpacity, display: 'block' }}
-            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          <DisplayLine
+            aria-hidden="true"
+            ref={(el) => {
+              lineRefs.current[0] = el;
+            }}
           >
-            {t('home.displayA')}
-          </motion.span>
-        </DisplayLine>
-        <DisplayLine
-          aria-hidden="true"
-          ref={(el) => {
-            lineRefs.current[1] = el;
-          }}
+            <motion.span
+              style={{ y: lineAY, opacity: displayOpacity, display: 'block' }}
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              {t('home.displayA')}
+            </motion.span>
+          </DisplayLine>
+          <DisplayLine
+            aria-hidden="true"
+            ref={(el) => {
+              lineRefs.current[1] = el;
+            }}
+          >
+            <motion.span
+              style={{ y: lineBY, opacity: displayOpacity, display: 'block' }}
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              {t('home.displayB')}
+            </motion.span>
+          </DisplayLine>
+          <DisplayLine
+            aria-hidden="true"
+            ref={(el) => {
+              lineRefs.current[2] = el;
+            }}
+          >
+            <motion.span
+              style={{ y: lineCY, opacity: displayOpacity, display: 'block' }}
+              transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            >
+              {t('home.displayC')}
+            </motion.span>
+          </DisplayLine>
+        </Display>
+
+        <motion.div
+          style={{ opacity: metaOpacity, y: metaY }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          <motion.span
-            style={{ y: lineBY, opacity: displayOpacity, display: 'block' }}
-            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            {t('home.displayB')}
-          </motion.span>
-        </DisplayLine>
-        <DisplayLine
-          aria-hidden="true"
-          ref={(el) => {
-            lineRefs.current[2] = el;
-          }}
-        >
-          <motion.span
-            style={{ y: lineCY, opacity: displayOpacity, display: 'block' }}
-            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          >
-            {t('home.displayC')}
-          </motion.span>
-        </DisplayLine>
-      </Display>
+          <Meta>
+            <Stacks ref={stacksRef}>{t('home.headline')}</Stacks>
+            <Description ref={descRef}>{t('home.description')}</Description>
+            <CtaRow ref={ctaRef}>
+              <PrimaryCta href="#contato">{t('home.contactCta')}</PrimaryCta>
+              <SkipLink href="#sobre">{t('home.skipIntro')}</SkipLink>
+            </CtaRow>
+          </Meta>
+        </motion.div>
+      </HeroMain>
 
       <motion.div
-        style={{ opacity: metaOpacity, y: metaY }}
+        style={{ opacity: asideOpacity, y: asideY }}
         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <Meta>
-          <Stacks ref={stacksRef}>{t('home.headline')}</Stacks>
-          <Description ref={descRef}>{t('home.description')}</Description>
-          <CtaRow ref={ctaRef}>
-            <PrimaryCta href="#contato">{t('home.contactCta')}</PrimaryCta>
-            <SkipLink href="#sobre">{t('home.skipIntro')}</SkipLink>
-          </CtaRow>
-        </Meta>
+        <HeroAside ref={asideRef} aria-label={t('home.statusBadge')}>
+          <StatusBadge>
+            <StatusDot aria-hidden="true" />
+            {t('home.statusBadge')}
+          </StatusBadge>
+          <HighlightsList>
+            <HighlightsItem>{t('home.highlight1')}</HighlightsItem>
+            <HighlightsItem>{t('home.highlight2')}</HighlightsItem>
+            <HighlightsItem>{t('home.highlight3')}</HighlightsItem>
+          </HighlightsList>
+        </HeroAside>
       </motion.div>
 
       <motion.div

@@ -101,8 +101,8 @@ vi.mock('gsap', () => {
       to: vi.fn(),
       fromTo: vi.fn(),
       registerPlugin: vi.fn(),
-      matchMedia: vi.fn(() => ({ add: vi.fn(), revert: vi.fn() })),
-    },
+      matchMedia: vi.fn(() => ({ add: vi.fn(), revert: vi.fn() }))
+    }
   };
 });
 
@@ -111,8 +111,8 @@ vi.mock('gsap/ScrollTrigger', () => ({
     create: vi.fn(),
     refresh: vi.fn(),
     getAll: vi.fn(() => []),
-    kill: vi.fn(),
-  },
+    kill: vi.fn()
+  }
 }));
 
 // Mock react-icons

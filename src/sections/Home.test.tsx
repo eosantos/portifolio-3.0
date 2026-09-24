@@ -76,4 +76,16 @@ describe('HomeSection', () => {
     const headings = screen.getAllByRole('heading', { level: 1 });
     expect(headings).toHaveLength(1);
   });
+
+  it('renders status badge', () => {
+    renderWithProviders(<Home />);
+    expect(screen.getByText('home.statusBadge')).toBeInTheDocument();
+  });
+
+  it('renders quick highlights', () => {
+    renderWithProviders(<Home />);
+    expect(screen.getByText('home.highlight1')).toBeInTheDocument();
+    expect(screen.getByText('home.highlight2')).toBeInTheDocument();
+    expect(screen.getByText('home.highlight3')).toBeInTheDocument();
+  });
 });

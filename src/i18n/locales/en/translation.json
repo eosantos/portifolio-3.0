@@ -13,7 +13,11 @@
     "eyebrow": "Eduardo Oliveira · Portfolio",
     "displayA": "FRONT-END",
     "displayB": "ENGINEER &",
-    "displayC": "DESIGNER"
+    "displayC": "DESIGNER",
+    "statusBadge": "Open to new opportunities",
+    "highlight1": "8+ years of experience",
+    "highlight2": "React · React Native · TypeScript",
+    "highlight3": "Design Systems & Accessibility"
   },
   "identity": {
     "code": "CODE.",

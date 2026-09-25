@@ -60,5 +60,16 @@
   "manifesto": {
     "label": "Manifesto",
     "tagline": "Código com propósito, criado para gerar impacto real."
+  },
+  "stacks": {
+    "label": "Stacks",
+    "categories": {
+      "frontend": "Front-end Web",
+      "mobile": "Mobile",
+      "styling": "Estilização",
+      "state": "Gerenciamento de estado",
+      "backend": "Back-end & Integração",
+      "product": "Produto & UX"
+    }
   }
 }

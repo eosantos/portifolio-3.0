@@ -60,5 +60,16 @@
   "manifesto": {
     "label": "Manifesto",
     "tagline": "Purposeful code, crafted for real impact."
+  },
+  "stacks": {
+    "label": "Stacks",
+    "categories": {
+      "frontend": "Front-end Web",
+      "mobile": "Mobile",
+      "styling": "Styling",
+      "state": "State management",
+      "backend": "Back-end & Integration",
+      "product": "Product & UX"
+    }
   }
 }

@@ -26,11 +26,13 @@
   },
   "about": {
     "quote": "Tecnologia é meio, não fim: meu foco é resolver problemas reais de negócio com boa experiência de usuário.",
-    "body1": "Há mais de 8 anos desenvolvendo produtos web e mobile com React, React Native e TypeScript — já passei por projetos em varejo (Magalu), turismo, fintech (EqSeed, Finnet) e e-commerce internacional (Samsung América Latina, via Trinto | Digital Partners).",
-    "body2": "Também dedico parte da minha carreira à mentoria técnica — gosto de contribuir para o crescimento de outros desenvolvedores tanto quanto para o código em si.",
+    "body1": "Há mais de 8 anos desenvolvendo produtos web e mobile com React, React Native e TypeScript. Já passei por contextos bem diferentes: varejo, atuando na tribo de Fintech dentro do Magalu, turismo, fintechs (EqSeed, Finnet) e e-commerce internacional (Samsung América Latina, via Trinto | Digital Partners).",
+    "body2": "Meu foco principal é front-end, mas também tenho experiência no back-end, com Node.js, MongoDB e PostgreSQL, o que ajuda na comunicação com o time todo e na proposta de soluções mais completas de ponta a ponta.",
+    "body3": "Também dedico parte da minha carreira à mentoria técnica, gosto de contribuir para o crescimento de outros desenvolvedores tanto quanto para o código em si.",
     "tag1": "8+ anos de experiência",
     "tag2": "Front-end & Mobile",
-    "tag3": "Web, mobile e fintech"
+    "tag3": "Web, mobile e fintech",
+    "tag4": "NODE.JS · MONGODB · POSTGRESQL"
   },
   "projects": {
     "title": "meus projetos",

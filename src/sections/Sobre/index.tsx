@@ -160,11 +160,15 @@ export default function AboutSection() {
           <Reveal delay={300}>
             <p>{t('about.body2')}</p>
           </Reveal>
+          <Reveal delay={350}>
+            <p>{t('about.body3')}</p>
+          </Reveal>
           <Reveal delay={400}>
             <Tags aria-label={t('nav.about')}>
               <Tag>{t('about.tag1')}</Tag>
               <Tag>{t('about.tag2')}</Tag>
               <Tag>{t('about.tag3')}</Tag>
+              <Tag>{t('about.tag4')}</Tag>
             </Tags>
           </Reveal>
         </Body>

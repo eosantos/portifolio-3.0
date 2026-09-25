@@ -55,10 +55,15 @@ describe('SobreSection', () => {
     renderWithProviders(<Sobre />);
     const body1 = screen.getByText('about.body1');
     const body2 = screen.getByText('about.body2');
+    const body3 = screen.getByText('about.body3');
     expect(body1).toBeInTheDocument();
     expect(body2).toBeInTheDocument();
+    expect(body3).toBeInTheDocument();
     expect(
       body1.compareDocumentPosition(body2) & Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
+    expect(
+      body2.compareDocumentPosition(body3) & Node.DOCUMENT_POSITION_FOLLOWING
     ).toBeTruthy();
   });
 
@@ -67,6 +72,7 @@ describe('SobreSection', () => {
     expect(screen.getByText('about.tag1')).toBeInTheDocument();
     expect(screen.getByText('about.tag2')).toBeInTheDocument();
     expect(screen.getByText('about.tag3')).toBeInTheDocument();
+    expect(screen.getByText('about.tag4')).toBeInTheDocument();
   });
 
   it('mentions companies as plain text, without logos', () => {

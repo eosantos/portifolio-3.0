@@ -25,12 +25,14 @@
     "inspire": "INSPIRE."
   },
   "about": {
-    "quote": "Technology is a means, not an end — my focus is solving real business problems through good user experience.",
-    "body1": "With over 8 years developing web and mobile products using React, React Native, and TypeScript, I've worked across retail (Magalu), tourism, fintech (EqSeed, Finnet), and international e-commerce (Samsung Latin America, via Trinto | Digital Partners).",
-    "body2": "I also dedicate part of my career to technical mentorship, taking as much pride in helping other developers grow as in the code itself.",
+    "quote": "Technology is a means, not an end my focus is solving real business problems through good user experience.",
+    "body1": "With over 8 years developing web and mobile products using React, React Native, and TypeScript, I've worked across different contexts: retail within the Fintech tribe at Magalu, tourism, fintech (EqSeed, Finnet), and international e-commerce (Samsung Latin America, via Trinto | Digital Partners).",
+    "body2": "My main focus is front-end, but I also have back-end experience with Node.js, MongoDB, and PostgreSQL, which helps me communicate better with the whole team and propose more complete, end-to-end solutions.",
+    "body3": "I also dedicate part of my career to technical mentorship. I take as much pride in helping other developers grow as in the code itself.",
     "tag1": "8+ years of experience",
     "tag2": "Front-end & Mobile",
-    "tag3": "Web, mobile & fintech"
+    "tag3": "Web, mobile & fintech",
+    "tag4": "NODE.JS · MONGODB · POSTGRESQL"
   },
   "projects": {
     "title": "my projects",

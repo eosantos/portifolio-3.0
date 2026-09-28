@@ -42,13 +42,17 @@ const HeaderInner = styled.div`
   }
 `;
 
-const BrandLink = styled(Link)`
+const BrandButton = styled.button`
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
   line-height: 1;
-  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
 
   &:focus-visible {
     outline: 2px solid ${({ theme }) => theme.purple};
@@ -380,7 +384,11 @@ export default function Header() {
       }}
     >
       <HeaderInner>
-        <BrandLink href="/" aria-label={t('nav.home')}>
+        <BrandButton
+          type="button"
+          aria-label={t('nav.home')}
+          onClick={() => scrollToSection('home')}
+        >
           <Image
             src={logoSrc}
             alt=""
@@ -392,7 +400,7 @@ export default function Header() {
           <BrandWordmark $compact={compact}>
             Eduardo Oliveira<BrandDot aria-hidden="true">.</BrandDot>
           </BrandWordmark>
-        </BrandLink>
+        </BrandButton>
 
         <NavPill
           ref={navRef}

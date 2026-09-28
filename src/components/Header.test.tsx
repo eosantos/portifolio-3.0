@@ -26,11 +26,10 @@ describe('Header', () => {
   it('renders brand lockup with icon and wordmark', () => {
     renderWithProviders(<Header />);
 
-    const brand = screen.getByRole('link', { name: 'nav.home' });
+    const brand = screen.getByRole('button', { name: 'nav.home' });
     expect(brand).toBeInTheDocument();
-    expect(brand).toHaveAttribute('href', '/');
     expect(brand).toHaveTextContent('Eduardo Oliveira');
-    // Icon is decorative inside a labelled link
+    // Icon is decorative inside a labelled button
     expect(brand.querySelector('img')).toBeInTheDocument();
   });
 
@@ -178,7 +177,7 @@ describe('Header', () => {
       fireEvent.scroll(window);
     });
 
-    const brand = screen.getByRole('link', { name: 'nav.home' });
+    const brand = screen.getByRole('button', { name: 'nav.home' });
     expect(brand.querySelector('img')).toBeInTheDocument();
   });
 

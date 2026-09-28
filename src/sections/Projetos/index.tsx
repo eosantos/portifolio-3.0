@@ -849,8 +849,14 @@ function ProjectModal({
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
+  const isMounted = useRef(false);
 
+  // Only run effect when modal is actually open (project is not null) and component is mounted
   useEffect(() => {
+    isMounted.current = true;
+
+    if (!project || !isMounted.current) return;
+
     previousActiveElement.current = document.activeElement as HTMLElement;
     document.body.style.overflow = 'hidden';
     modalRef.current?.focus();
@@ -877,11 +883,13 @@ function ProjectModal({
 
     document.addEventListener('keydown', handleKeyDown);
     return () => {
-      document.body.style.overflow = '';
+      if (isMounted.current) {
+        document.body.style.overflow = '';
+      }
       document.removeEventListener('keydown', handleKeyDown);
       previousActiveElement.current?.focus();
     };
-  }, [onClose]);
+  }, [project, onClose]);
 
   if (!project) return null;
 

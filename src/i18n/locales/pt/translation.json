@@ -36,7 +36,75 @@
   },
   "projects": {
     "title": "meus projetos",
-    "empty": "Nenhum projeto cadastrado ainda."
+    "empty": "Nenhum projeto cadastrado ainda.",
+    "featured": "Destaques",
+    "all": "Todos os projetos",
+    "viewMore": "Ver mais",
+    "close": "Fechar",
+    "period": "Período",
+    "highlights": "Destaques",
+    "technologies": "Tecnologias",
+    "actions": "Ações",
+    "viewProject": "Acessar projeto",
+    "viewRepo": "Acessar repositório",
+    "internalProject": "Projeto interno",
+    "studyProject": "Projeto de estudo",
+    "trainingProject": "Projeto de treinamento",
+    "featured1": {
+      "name": "Cartão Magalu / SuperApp Magalu — Luizalabs",
+      "shortDesc": "Integração do Cartão Magalu ao SuperApp, eliminando a necessidade de sair do app para consultar fatura.",
+      "fullDesc": "Atuei na tribo de Fintech do Magalu num projeto para facilitar o acesso a dados de fatura (lançamentos, fechamento, vencimento) do Cartão Luiza dentro do SuperApp Magalu. Isso teve grande impacto na retenção de clientes dentro do app, eliminando a necessidade de acessar outro aplicativo. Também contribuí para uma ferramenta de Backoffice para o time de fraudes e operações, para uma nova Landing Page do Cartão Magalu (com informações de anuidade, cashback e descontos), e para o MiniApp MagaluPay — uma arquitetura guarda-chuva que permite autonomia de times para features de negócio independentes.",
+      "period": "2020–2021",
+      "highlights": [
+        "Integração com APIs de terceiros",
+        "Foco em navegação e acessibilidade",
+        "Webview com FAQ e informações do cartão",
+        "Contribuição para arquitetura MiniApp (MagaluPay)"
+      ],
+      "technologies": ["React", "Next.js (SSR)", "Styled Components", "React Hooks"]
+    },
+    "featured2": {
+      "name": "Reestruturação da plataforma de investimentos — EqSeed",
+      "shortDesc": "Reestruturação completa do front-end de uma fintech de investimentos, com simulador e fluxos de pagamento.",
+      "fullDesc": "Responsável por reestruturar a arquitetura front-end da plataforma de investimentos da EqSeed, com foco em escalabilidade, performance e manutenção. Criei uma base sólida em Next.js com TypeScript, Styled Components e ESLint. Implementei funcionalidades críticas como o simulador de investimento, o fluxo de liquidação e pagamento (cartão de crédito, PIX, QR Code) e comprovantes, trabalhando de forma colaborativa com produto, design (Figma/Design System) e marketing.",
+      "period": "2024–2025",
+      "highlights": [
+        "Simulador de investimento",
+        "Fluxo de pagamento: cartão, PIX, QR Code",
+        "Integração com APIs REST",
+        "Padrões de acessibilidade"
+      ],
+      "technologies": ["Next.js", "TypeScript", "Styled Components", "REST APIs"]
+    },
+    "featured3": {
+      "name": "Sites Samsung América Latina — Trinto | Digital Partners",
+      "shortDesc": "Aplicações customizadas de alta performance para os sites da Samsung em toda a América Latina, na VTEX IO.",
+      "fullDesc": "Contribuí para o desenvolvimento de projetos na plataforma VTEX IO, direcionados aos sites da Samsung na América Latina. Trabalhei na concepção e manutenção de aplicativos customizados com React e TypeScript, implementação de middlewares JavaScript para comunicação com o Master Data, liderança de estilização (CSS/Sass), e onboarding de novos colaboradores.",
+      "period": "2021–2022",
+      "highlights": [
+        "Apps customizados em React + TypeScript na VTEX IO",
+        "Middlewares de integração com Master Data",
+        "Estilização em escala (CSS/Sass)",
+        "Onboarding de novos desenvolvedores"
+      ],
+      "technologies": ["React", "TypeScript", "VTEX IO", "Sass"]
+    },
+    "project4": {
+      "name": "event-platform",
+      "shortDesc": "Plataforma de eventos — projeto pessoal de estudo.",
+      "technologies": ["TypeScript", "Vite", "TailwindCSS", "GraphQL"],
+      "link": "https://event-platform-eosantos.vercel.app",
+      "github": "https://github.com/eosantos/event-platform",
+      "type": "study"
+    },
+    "project5": {
+      "name": "ecommerce-reactjs-app",
+      "shortDesc": "E-commerce — projeto de treinamento com React, Next.js e TypeScript.",
+      "technologies": ["React", "TypeScript", "Next.js", "Material UI"],
+      "link": "https://ecommerce-reactjs-app.vercel.app",
+      "github": "https://github.com/eosantos/ecommerce-reactjs-app",
+      "type": "training"
+    }
   },
   "contact": {
     "title": "entre em contato",

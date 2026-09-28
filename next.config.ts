@@ -3,7 +3,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true
   },
-  allowedDevOrigins: ['192.168.15.8']
+  allowedDevOrigins: ['192.168.15.18']
 };
 
 export default nextConfig;

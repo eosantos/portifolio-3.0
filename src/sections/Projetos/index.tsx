@@ -5,6 +5,7 @@ import Reveal from '@/components/Reveal';
 import { media } from '@/styles/media';
 import { useTranslation } from 'react-i18next';
 import styled, { keyframes } from 'styled-components';
+import { TechTagComponent } from '@/components/TechTag';
 import {
   SiReact,
   SiNextdotjs,
@@ -18,16 +19,6 @@ import {
   SiMaterialdesign
 } from 'react-icons/si';
 import { FaExternalLinkAlt, FaGithub, FaTimes } from 'react-icons/fa';
-
-interface TechIconProps {
-  icon: React.ComponentType<{ size?: number; color?: string }>;
-}
-
-const TechIcon = styled(({ icon: Icon, ...props }: TechIconProps) => (
-  <Icon {...props} size={16} color="currentColor" />
-))`
-  flex-shrink: 0;
-`;
 
 const Section = styled.section`
   position: relative;
@@ -190,25 +181,6 @@ const CardTechStack = styled.div`
   gap: 0.5rem;
 `;
 
-const CardTechTag = styled.span`
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.purple};
-  padding: 0.375rem 0.75rem;
-  border: 1px solid ${({ theme }) => theme.currentline};
-  border-radius: 999px;
-  background: ${({ theme }) => theme.background};
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
-
-  ${ProjectCard}:hover & {
-    border-color: ${({ theme }) => theme.purple};
-  }
-`;
-
 const ViewMoreButton = styled.button`
   display: inline-flex;
   align-items: center;
@@ -321,38 +293,84 @@ const ModalClose = styled.button`
 const ModalBody = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   max-height: 90vh;
-  padding: 2rem;
+  overflow: hidden;
 
   ${media.greaterThan('md')} {
     flex-direction: row;
-    padding: 2.5rem;
   }
 `;
 
-const ModalMedia = styled.div`
+const ModalLeftColumn = styled.div`
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+
+  ${media.greaterThan('md')} {
+    flex: 0 0 50%;
+    min-width: 0;
+  }
+`;
+
+const ModalRightColumn = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  overflow: hidden;
+
+  ${media.lessThan('md')} {
+    margin-top: 1.5rem;
+  }
+`;
+
+const ModalMedia = styled.div<{ $coverImage?: string }>`
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
-  background: ${({ theme }) => theme.currentline};
-  border-radius: 12px;
+  background: ${({ theme, $coverImage }) =>
+    $coverImage ? 'transparent' : theme.currentline};
+  border-radius: 16px;
   overflow: hidden;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 
   ${media.greaterThan('md')} {
-    width: 50%;
+    width: 100%;
     aspect-ratio: auto;
     height: 100%;
     min-height: 400px;
-    margin-bottom: 0;
-    margin-right: 2rem;
-    flex-shrink: 0;
-    border-radius: 12px 0 0 12px;
+    border-radius: 16px 0 0 16px;
   }
+
+  ${({ $coverImage }) =>
+    $coverImage &&
+    `
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url(${$coverImage});
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.7) 100%
+      );
+      z-index: 1;
+    }
+  `}
 `;
 
 const ModalMediaTitle = styled.span`
@@ -363,14 +381,54 @@ const ModalMediaTitle = styled.span`
   text-align: center;
   padding: 1rem;
   line-height: 1.2;
+  position: relative;
+  z-index: 2;
 `;
 
 const ModalContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   min-width: 0;
+  max-height: 100%;
+  overflow: hidden;
+
+  ${media.greaterThan('md')} {
+    padding: 0;
+  }
+`;
+
+const ModalScrollArea = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem 2rem 2rem;
+  max-height: calc(100vh - 180px);
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.background};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.purple};
+    border-radius: 4px;
+    border: 2px solid ${({ theme }) => theme.background};
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.purple}cc;
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: ${({ theme }) => theme.purple}
+    ${({ theme }) => theme.background};
+
+  ${media.greaterThan('md')} {
+    padding: 0 0 2rem;
+  }
 `;
 
 const ModalHeader = styled.div`
@@ -378,6 +436,16 @@ const ModalHeader = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   gap: 0.75rem 1.5rem;
+  padding: 2rem 2rem 1rem;
+  border-bottom: 1px solid ${({ theme }) => theme.currentline};
+  flex-shrink: 0;
+
+  ${media.greaterThan('md')} {
+    padding: 0 0 1.5rem;
+    border-bottom: none;
+    border-right: 1px solid ${({ theme }) => theme.currentline};
+    padding-right: 2.5rem;
+  }
 `;
 
 const ModalTitle = styled.h2`
@@ -470,18 +538,6 @@ const ModalTechStack = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-`;
-
-const ModalTechTag = styled.span`
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.purple};
-  padding: 0.375rem 0.75rem;
-  border: 1px solid ${({ theme }) => theme.currentline};
-  border-radius: 999px;
-  background: ${({ theme }) => theme.background};
 `;
 
 const ModalActions = styled.div`
@@ -591,6 +647,7 @@ interface FeaturedProject {
   highlights: string[];
   technologies: string[];
   coverColor?: string;
+  coverImage?: string;
 }
 
 interface AllProject {
@@ -602,6 +659,7 @@ interface AllProject {
   github?: string;
   type: 'internal' | 'study' | 'training';
   coverColor?: string;
+  coverImage?: string;
 }
 
 const featuredProjects: FeaturedProject[] = [
@@ -624,6 +682,7 @@ const featuredProjects: FeaturedProject[] = [
       'React Hooks'
     ],
     coverColor: '#1a1a2e'
+    // coverImage: '/images/projects/magalu-card.jpg',
   },
   {
     id: 'featured2',
@@ -639,6 +698,7 @@ const featuredProjects: FeaturedProject[] = [
     ],
     technologies: ['Next.js', 'TypeScript', 'Styled Components', 'REST APIs'],
     coverColor: '#16213e'
+    // coverImage: '/images/projects/eqseed-platform.jpg',
   },
   {
     id: 'featured3',
@@ -654,6 +714,7 @@ const featuredProjects: FeaturedProject[] = [
     ],
     technologies: ['React', 'TypeScript', 'VTEX IO', 'Sass'],
     coverColor: '#0f0f23'
+    // coverImage: '/images/projects/samsung-latam.jpg',
   }
 ];
 
@@ -670,6 +731,7 @@ const allProjects: AllProject[] = [
     ],
     type: 'internal',
     coverColor: '#1a1a2e'
+    // coverImage: '/images/projects/magalu-card.jpg',
   },
   {
     id: 'featured2',
@@ -678,6 +740,7 @@ const allProjects: AllProject[] = [
     technologies: ['Next.js', 'TypeScript', 'Styled Components', 'REST APIs'],
     type: 'internal',
     coverColor: '#16213e'
+    // coverImage: '/images/projects/eqseed-platform.jpg',
   },
   {
     id: 'featured3',
@@ -686,6 +749,7 @@ const allProjects: AllProject[] = [
     technologies: ['React', 'TypeScript', 'VTEX IO', 'Sass'],
     type: 'internal',
     coverColor: '#0f0f23'
+    // coverImage: '/images/projects/samsung-latam.jpg',
   },
   {
     id: 'project4',
@@ -696,6 +760,7 @@ const allProjects: AllProject[] = [
     github: 'https://github.com/eosantos/event-platform',
     type: 'study',
     coverColor: '#1a1a2e'
+    // coverImage: '/images/projects/event-platform.jpg',
   },
   {
     id: 'project5',
@@ -706,6 +771,7 @@ const allProjects: AllProject[] = [
     github: 'https://github.com/eosantos/ecommerce-reactjs-app',
     type: 'training',
     coverColor: '#16213e'
+    // coverImage: '/images/projects/ecommerce.jpg',
   }
 ];
 
@@ -736,10 +802,9 @@ function FeaturedCard({
           <CardDescription>{t(project.shortDesc)}</CardDescription>
           <CardTechStack>
             {project.technologies.map((tech) => (
-              <CardTechTag key={tech}>
-                <TechIcon icon={getTechIcon(tech)} aria-hidden="true" />
+              <TechTagComponent key={tech} icon={getTechIcon(tech)}>
                 {tech}
-              </CardTechTag>
+              </TechTagComponent>
             ))}
           </CardTechStack>
           <ViewMoreButton
@@ -788,10 +853,9 @@ function AllProjectCard({
           <CardDescription>{t(project.shortDesc)}</CardDescription>
           <CardTechStack>
             {project.technologies.map((tech) => (
-              <CardTechTag key={tech}>
-                <TechIcon icon={getTechIcon(tech)} aria-hidden="true" />
+              <TechTagComponent key={tech} icon={getTechIcon(tech)}>
                 {tech}
-              </CardTechTag>
+              </TechTagComponent>
             ))}
           </CardTechStack>
           {hasLinks && (
@@ -905,47 +969,52 @@ function ProjectModal({
           <FaTimes aria-hidden="true" size={20} />
         </ModalClose>
         <ModalBody>
-          <ModalMedia>
-            <ModalMediaTitle>{t(project.name)}</ModalMediaTitle>
-          </ModalMedia>
-          <ModalContent>
-            <ModalHeader>
-              <ModalTitle id="modal-title">{t(project.name)}</ModalTitle>
-              <ModalPeriod>
-                {t('projects.period')}: {t(project.period)}
-              </ModalPeriod>
-              <ModalType>{t('projects.internalProject')}</ModalType>
-            </ModalHeader>
-            <ModalDescription>{t(project.fullDesc)}</ModalDescription>
-            <ModalHighlights>
-              <ModalHighlightsTitle>
-                {t('projects.highlights')}
-              </ModalHighlightsTitle>
-              <ModalHighlightsList>
-                {project.highlights.map((highlight, index) => (
-                  <ModalHighlightItem key={index}>
-                    {t(highlight)}
-                  </ModalHighlightItem>
-                ))}
-              </ModalHighlightsList>
-            </ModalHighlights>
-            <ModalTechStack>
-              <ModalHighlightsTitle>
-                {t('projects.technologies')}
-              </ModalHighlightsTitle>
-              {project.technologies.map((tech) => (
-                <ModalTechTag key={tech}>
-                  <TechIcon icon={getTechIcon(tech)} aria-hidden="true" />
-                  {tech}
-                </ModalTechTag>
-              ))}
-            </ModalTechStack>
-            <ModalActions>
-              <ActionButtonSecondary>
-                {t('projects.internalProject')}
-              </ActionButtonSecondary>
-            </ModalActions>
-          </ModalContent>
+          <ModalLeftColumn>
+            <ModalMedia $coverImage={project.coverImage}>
+              <ModalMediaTitle>{t(project.name)}</ModalMediaTitle>
+            </ModalMedia>
+          </ModalLeftColumn>
+          <ModalRightColumn>
+            <ModalContent>
+              <ModalHeader>
+                <ModalTitle id="modal-title">{t(project.name)}</ModalTitle>
+                <ModalPeriod>
+                  {t('projects.period')}: {t(project.period)}
+                </ModalPeriod>
+                <ModalType>{t('projects.internalProject')}</ModalType>
+              </ModalHeader>
+              <ModalScrollArea>
+                <ModalDescription>{t(project.fullDesc)}</ModalDescription>
+                <ModalHighlights>
+                  <ModalHighlightsTitle>
+                    {t('projects.highlights')}
+                  </ModalHighlightsTitle>
+                  <ModalHighlightsList>
+                    {project.highlights.map((highlight, index) => (
+                      <ModalHighlightItem key={index}>
+                        {t(highlight)}
+                      </ModalHighlightItem>
+                    ))}
+                  </ModalHighlightsList>
+                </ModalHighlights>
+                <ModalTechStack>
+                  <ModalHighlightsTitle>
+                    {t('projects.technologies')}
+                  </ModalHighlightsTitle>
+                  {project.technologies.map((tech) => (
+                    <TechTagComponent key={tech} icon={getTechIcon(tech)}>
+                      {tech}
+                    </TechTagComponent>
+                  ))}
+                </ModalTechStack>
+                <ModalActions>
+                  <ActionButtonSecondary>
+                    {t('projects.internalProject')}
+                  </ActionButtonSecondary>
+                </ModalActions>
+              </ModalScrollArea>
+            </ModalContent>
+          </ModalRightColumn>
         </ModalBody>
       </Modal>
     </ModalOverlay>

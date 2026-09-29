@@ -5,6 +5,7 @@ import Reveal from '@/components/Reveal';
 import { media } from '@/styles/media';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import { TechTagComponent } from '@/components/TechTag';
 import {
   SiReact,
   SiNextdotjs,
@@ -24,16 +25,6 @@ import {
   SiGraphql,
   SiFigma
 } from 'react-icons/si';
-
-interface TechIconProps {
-  icon: React.ComponentType<{ size?: number; color?: string }>;
-}
-
-const TechIcon = styled(({ icon: Icon, ...props }: TechIconProps) => (
-  <Icon {...props} size={24} color="currentColor" />
-))`
-  flex-shrink: 0;
-`;
 
 const Section = styled.section`
   position: relative;
@@ -151,59 +142,15 @@ const TechGrid = styled.ul`
 `;
 
 const TechCard = styled.li`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  min-width: 90px;
-  max-width: 130px;
-  padding: 1rem 0.875rem 1.5rem;
-  border: 1px solid ${({ theme }) => theme.currentline};
-  border-radius: 12px;
-  background: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.text};
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
     border-color 0.2s ease;
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 1px;
-    right: 1px;
-    height: 3px;
-    background: ${({ theme }) => theme.purple};
-    border-radius: 0 0 11px 11px;
-    opacity: 0.8;
-  }
-
   &:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
     border-color: ${({ theme }) => theme.purple};
-  }
-
-  ${media.greaterThan('md')} {
-    min-width: 100px;
-    max-width: 140px;
-    padding: 1.25rem 1rem 1.75rem;
-  }
-`;
-
-const TechName = styled.span`
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 1.3;
-  color: ${({ theme }) => theme.text};
-
-  ${media.greaterThan('md')} {
-    font-size: 0.75rem;
   }
 `;
 
@@ -285,8 +232,7 @@ function CategoryPanelComponent({ category, isActive, t }: CategoryPanelProps) {
         {items.map((tech, index) => (
           <Reveal key={tech.name} delay={index * 30} y={12}>
             <TechCard role="listitem">
-              <TechIcon icon={tech.icon} aria-hidden="true" />
-              <TechName>{tech.name}</TechName>
+              <TechTagComponent icon={tech.icon}>{tech.name}</TechTagComponent>
             </TechCard>
           </Reveal>
         ))}

@@ -87,6 +87,7 @@ const ProjectCard = styled.article`
     transform 0.2s ease,
     box-shadow 0.2s ease,
     border-color 0.2s ease;
+  max-height: 490px;
 
   &:hover {
     transform: translateY(-4px);
@@ -109,6 +110,7 @@ const CardCover = styled.div<{ $bgColor?: string }>`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  max-height: 210px;
 
   &::before {
     content: '';
@@ -227,18 +229,18 @@ const slideUp = keyframes`
 `;
 
 const ModalOverlay = styled.div`
-  position: fixed !important;
-  top: 85px !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  z-index: 99999 !important;
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  display: flex !important;
-  align-items: flex-start !important;
-  justify-content: center !important;
-  padding: 1.5rem !important;
-  overflow-y: auto !important;
+  position: fixed;
+  top: 65px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.5rem;
+  overflow-y: auto;
 
   animation: ${fadeIn} 0.2s ease;
 
@@ -248,18 +250,18 @@ const ModalOverlay = styled.div`
 `;
 
 const Modal = styled.div`
-  position: relative !important;
-  width: 100% !important;
-  max-width: 850px !important;
-  max-height: calc(100vh - 140px) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  background: #282a36 !important;
-  border: 1px solid #44475a !important;
-  border-radius: 16px !important;
-  overflow: hidden !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
-  margin: auto !important;
+  position: relative;
+  width: 100%;
+  max-width: 850px;
+  max-height: calc(100vh - 140px);
+  display: flex;
+  flex-direction: column;
+  background: #282a36;
+  border: 1px solid #44475a;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  margin: auto;
   animation: ${slideUp} 0.3s ease;
 
   @media (prefers-reduced-motion: reduce) {
@@ -298,37 +300,37 @@ const ModalClose = styled.button`
 `;
 
 const ModalBody = styled.div`
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
 
   ${media.greaterThan('md')} {
-    flex-direction: row !important;
+    flex-direction: row;
   }
 `;
 
 const ModalLeftColumn = styled.div`
-  flex: 0 0 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
 
   ${media.greaterThan('md')} {
-    flex: 0 0 50% !important;
-    min-width: 0 !important;
+    flex: 0 0 50%;
+    min-width: 0;
   }
 `;
 
 const ModalRightColumn = styled.div`
-  flex: 1 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  min-height: 0 !important;
-  overflow: hidden !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
 
   ${media.lessThan('md')} {
-    margin-top: 1.5rem !important;
+    margin-top: 1.5rem;
   }
 `;
 
@@ -415,6 +417,7 @@ const ModalHeader = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.currentline};
   margin-bottom: 1rem;
   flex-shrink: 0;
+  flex-direction: column;
 
   ${media.greaterThan('md')} {
     padding-bottom: 1.5rem;
@@ -422,33 +425,33 @@ const ModalHeader = styled.div`
 `;
 
 const ModalScrollArea = styled.div`
-  flex: 1 1 auto !important;
-  overflow-y: auto !important;
-  min-height: 0 !important;
-  padding: 1.5rem !important;
-  -webkit-overflow-scrolling: touch !important;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;
+  padding: 1.5rem;
+  -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar {
-    width: 8px !important;
+    width: 8px;
   }
 
   &::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.background} !important;
+    background: ${({ theme }) => theme.background};
   }
 
   &::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.purple} !important;
-    border-radius: 4px !important;
-    border: 2px solid ${({ theme }) => theme.background} !important;
+    background: ${({ theme }) => theme.purple};
+    border-radius: 4px;
+    border: 2px solid ${({ theme }) => theme.background};
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: ${({ theme }) => theme.purple}cc !important;
+    background: ${({ theme }) => theme.purple}cc;
   }
 
-  scrollbar-width: thin !important;
+  scrollbar-width: thin;
   scrollbar-color: ${({ theme }) => theme.purple}
-    ${({ theme }) => theme.background} !important;
+    ${({ theme }) => theme.background};
 `;
 
 const ModalTitle = styled.h2`
@@ -493,6 +496,7 @@ const ModalType = styled.span`
 
 const ModalDescription = styled.p`
   font-size: 1rem;
+  padding-bottom: 1rem;
   line-height: 1.7;
   color: ${({ theme }) => theme.comment};
   margin: 0;
@@ -502,6 +506,7 @@ const ModalHighlights = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  padding-bottom: 1rem;
 `;
 
 const ModalHighlightsTitle = styled.h4`
@@ -543,20 +548,11 @@ const ModalTechStack = styled.div`
   gap: 0.5rem;
 `;
 
-const ModalActions = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: auto;
-  padding-top: 1rem;
-  border-top: 1px solid ${({ theme }) => theme.currentline};
-`;
-
 const ActionButton = styled.a`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.875rem 1.5rem;
+  padding: 0.875rem;
   border: 1px solid ${({ theme }) => theme.purple};
   border-radius: 999px;
   background: ${({ theme }) => theme.purple};
@@ -1039,21 +1035,16 @@ function ProjectModal({
                     ))}
                   </ModalHighlightsList>
                 </ModalHighlights>
+                <ModalHighlightsTitle>
+                  {t('projects.technologies')}
+                </ModalHighlightsTitle>
                 <ModalTechStack>
-                  <ModalHighlightsTitle>
-                    {t('projects.technologies')}
-                  </ModalHighlightsTitle>
                   {project.technologies.map((tech) => (
                     <TechTagComponent key={tech} icon={getTechIcon(tech)}>
                       {tech}
                     </TechTagComponent>
                   ))}
                 </ModalTechStack>
-                <ModalActions>
-                  <ActionButtonSecondary>
-                    {t('projects.internalProject')}
-                  </ActionButtonSecondary>
-                </ModalActions>
               </ModalScrollArea>
             </ModalContent>
           </ModalRightColumn>

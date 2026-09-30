@@ -84,8 +84,3 @@ export function useScrollProgress() {
   }
   return context;
 }
-
-export function useScrollYProgress() {
-  const { scrollYProgress, isReducedMotion } = useScrollProgress();
-  return { scrollYProgress, isReducedMotion };
-}

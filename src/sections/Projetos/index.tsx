@@ -19,6 +19,7 @@ import {
   SiMaterialdesign
 } from 'react-icons/si';
 import { FaExternalLinkAlt, FaGithub, FaTimes } from 'react-icons/fa';
+import { createPortal } from 'react-dom';
 
 const Section = styled.section`
   position: relative;
@@ -231,7 +232,7 @@ const ModalOverlay = styled.div`
   left: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
-  z-index: 2147483647 !important;
+  z-index: 99999 !important;
   background-color: rgba(0, 0, 0, 0.8) !important;
   display: flex !important;
   align-items: flex-start !important;
@@ -247,7 +248,6 @@ const ModalOverlay = styled.div`
 `;
 
 const Modal = styled.div`
-  top: 185px !important;
   position: relative !important;
   width: 100% !important;
   max-width: 850px !important;
@@ -427,6 +427,28 @@ const ModalScrollArea = styled.div`
   min-height: 0 !important;
   padding: 1.5rem !important;
   -webkit-overflow-scrolling: touch !important;
+
+  &::-webkit-scrollbar {
+    width: 8px !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.background} !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.purple} !important;
+    border-radius: 4px !important;
+    border: 2px solid ${({ theme }) => theme.background} !important;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.purple}cc !important;
+  }
+
+  scrollbar-width: thin !important;
+  scrollbar-color: ${({ theme }) => theme.purple}
+    ${({ theme }) => theme.background} !important;
 `;
 
 const ModalTitle = styled.h2`
@@ -977,7 +999,7 @@ function ProjectModal({
 
   if (!project) return null;
 
-  return (
+  const modalContent = (
     <ModalOverlay
       onClick={onClose}
       role="dialog"
@@ -1039,6 +1061,8 @@ function ProjectModal({
       </Modal>
     </ModalOverlay>
   );
+
+  return createPortal(modalContent, document.body);
 }
 
 export default function ProjetosSection() {

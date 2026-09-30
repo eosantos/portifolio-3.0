@@ -1,9 +1,20 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import os from 'os';
+import type { NextConfig } from 'next';
+
+const interfaces = os.networkInterfaces();
+
+const localIp = Object.values(interfaces)
+  .flat()
+  .find((networkInterface) => {
+    return networkInterface?.family === 'IPv4' && !networkInterface.internal;
+  })?.address;
+
+const nextConfig: NextConfig = {
   compiler: {
     styledComponents: true
   },
-  allowedDevOrigins: ['192.168.15.10']
+
+  allowedDevOrigins: localIp ? [localIp] : []
 };
 
 export default nextConfig;

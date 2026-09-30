@@ -38,6 +38,14 @@ const TechTag = styled.span`
   }
 `;
 
+const TechTagText = styled.span`
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 interface TechTagProps {
   children: React.ReactNode;
   icon?: React.ComponentType<{ size?: number; color?: string }>;
@@ -48,7 +56,7 @@ export function TechTagComponent({ children, icon, className }: TechTagProps) {
   return (
     <TechTag className={className}>
       {icon && <TechIcon icon={icon} aria-hidden="true" />}
-      {children}
+      <TechTagText>{children}</TechTagText>
     </TechTag>
   );
 }
@@ -68,6 +76,14 @@ const ModalTechTag = styled.span`
   background: ${({ theme }) => theme.background};
 `;
 
+const ModalTechTagText = styled.span`
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 export function ModalTechTagComponent({
   children,
   icon
@@ -78,7 +94,7 @@ export function ModalTechTagComponent({
   return (
     <ModalTechTag>
       {icon && <TechIcon icon={icon} aria-hidden="true" />}
-      {children}
+      <ModalTechTagText>{children}</ModalTechTagText>
     </ModalTechTag>
   );
 }

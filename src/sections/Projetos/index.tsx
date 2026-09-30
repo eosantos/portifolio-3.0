@@ -226,15 +226,19 @@ const slideUp = keyframes`
 `;
 
 const ModalOverlay = styled.div`
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(4px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  position: fixed !important;
+  top: 85px !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 2147483647 !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  padding: 1.5rem !important;
+  overflow-y: auto !important;
+
   animation: ${fadeIn} 0.2s ease;
 
   @media (prefers-reduced-motion: reduce) {
@@ -243,16 +247,19 @@ const ModalOverlay = styled.div`
 `;
 
 const Modal = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 900px;
-  max-height: 90vh;
-  background: ${({ theme }) => theme.background};
-  border: 1px solid ${({ theme }) => theme.currentline};
-  border-radius: 16px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  top: 185px !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 850px !important;
+  max-height: calc(100vh - 140px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: #282a36 !important;
+  border: 1px solid #44475a !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
+  margin: auto !important;
   animation: ${slideUp} 0.3s ease;
 
   @media (prefers-reduced-motion: reduce) {
@@ -291,36 +298,37 @@ const ModalClose = styled.button`
 `;
 
 const ModalBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-height: 90vh;
-  overflow: hidden;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
 
   ${media.greaterThan('md')} {
-    flex-direction: row;
+    flex-direction: row !important;
   }
 `;
 
 const ModalLeftColumn = styled.div`
-  flex: 0 0 100%;
-  display: flex;
-  flex-direction: column;
+  flex: 0 0 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
 
   ${media.greaterThan('md')} {
-    flex: 0 0 50%;
-    min-width: 0;
+    flex: 0 0 50% !important;
+    min-width: 0 !important;
   }
 `;
 
 const ModalRightColumn = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  max-height: 100%;
-  overflow: hidden;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
 
   ${media.lessThan('md')} {
-    margin-top: 1.5rem;
+    margin-top: 1.5rem !important;
   }
 `;
 
@@ -390,44 +398,11 @@ const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 0;
-  max-height: 100%;
+  min-height: 0;
   overflow: hidden;
 
   ${media.greaterThan('md')} {
     padding: 0;
-  }
-`;
-
-const ModalScrollArea = styled.div`
-  flex: 1;
-  overflow-y: auto;
-  padding: 2rem 2rem 2rem;
-  max-height: calc(100vh - 180px);
-
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.background};
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.purple};
-    border-radius: 4px;
-    border: 2px solid ${({ theme }) => theme.background};
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: ${({ theme }) => theme.purple}cc;
-  }
-
-  scrollbar-width: thin;
-  scrollbar-color: ${({ theme }) => theme.purple}
-    ${({ theme }) => theme.background};
-
-  ${media.greaterThan('md')} {
-    padding: 0 0 2rem;
   }
 `;
 
@@ -436,16 +411,22 @@ const ModalHeader = styled.div`
   flex-wrap: wrap;
   align-items: flex-start;
   gap: 0.75rem 1.5rem;
-  padding: 2rem 2rem 1rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid ${({ theme }) => theme.currentline};
+  margin-bottom: 1rem;
   flex-shrink: 0;
 
   ${media.greaterThan('md')} {
-    padding: 0 0 1.5rem;
-    border-bottom: none;
-    border-right: 1px solid ${({ theme }) => theme.currentline};
-    padding-right: 2.5rem;
+    padding-bottom: 1.5rem;
   }
+`;
+
+const ModalScrollArea = styled.div`
+  flex: 1 1 auto !important;
+  overflow-y: auto !important;
+  min-height: 0 !important;
+  padding: 1.5rem !important;
+  -webkit-overflow-scrolling: touch !important;
 `;
 
 const ModalTitle = styled.h2`
@@ -598,6 +579,32 @@ const ActionButtonSecondary = styled.button`
   cursor: default;
 `;
 
+const CardActions = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+
+  ${media.greaterThan('md')} {
+    justify-content: stretch;
+  }
+
+  ${media.lessThan('md')} {
+    flex-direction: column;
+    align-items: stretch;
+  }
+`;
+
+const CardActionButton = styled(ActionButton)`
+  flex: 1 1 0;
+  justify-content: center;
+  min-width: 0;
+
+  ${media.lessThan('md')} {
+    width: 100%;
+  }
+`;
+
 const GenericIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -681,8 +688,9 @@ const featuredProjects: FeaturedProject[] = [
       'Styled Components',
       'React Hooks'
     ],
-    coverColor: '#1a1a2e'
-    // coverImage: '/images/projects/magalu-card.jpg',
+    coverColor: '#1a1a2e',
+    coverImage:
+      'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80'
   },
   {
     id: 'featured2',
@@ -697,8 +705,9 @@ const featuredProjects: FeaturedProject[] = [
       'projects.featured2.highlights.3'
     ],
     technologies: ['Next.js', 'TypeScript', 'Styled Components', 'REST APIs'],
-    coverColor: '#16213e'
-    // coverImage: '/images/projects/eqseed-platform.jpg',
+    coverColor: '#16213e',
+    coverImage:
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80'
   },
   {
     id: 'featured3',
@@ -713,8 +722,9 @@ const featuredProjects: FeaturedProject[] = [
       'projects.featured3.highlights.3'
     ],
     technologies: ['React', 'TypeScript', 'VTEX IO', 'Sass'],
-    coverColor: '#0f0f23'
-    // coverImage: '/images/projects/samsung-latam.jpg',
+    coverColor: '#0f0f23',
+    coverImage:
+      'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80'
   }
 ];
 
@@ -730,8 +740,9 @@ const allProjects: AllProject[] = [
       'React Hooks'
     ],
     type: 'internal',
-    coverColor: '#1a1a2e'
-    // coverImage: '/images/projects/magalu-card.jpg',
+    coverColor: '#1a1a2e',
+    coverImage:
+      'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80'
   },
   {
     id: 'featured2',
@@ -739,8 +750,9 @@ const allProjects: AllProject[] = [
     shortDesc: 'projects.featured2.shortDesc',
     technologies: ['Next.js', 'TypeScript', 'Styled Components', 'REST APIs'],
     type: 'internal',
-    coverColor: '#16213e'
-    // coverImage: '/images/projects/eqseed-platform.jpg',
+    coverColor: '#16213e',
+    coverImage:
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80'
   },
   {
     id: 'featured3',
@@ -748,8 +760,9 @@ const allProjects: AllProject[] = [
     shortDesc: 'projects.featured3.shortDesc',
     technologies: ['React', 'TypeScript', 'VTEX IO', 'Sass'],
     type: 'internal',
-    coverColor: '#0f0f23'
-    // coverImage: '/images/projects/samsung-latam.jpg',
+    coverColor: '#0f0f23',
+    coverImage:
+      'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80'
   },
   {
     id: 'project4',
@@ -759,8 +772,9 @@ const allProjects: AllProject[] = [
     link: 'https://event-platform-eosantos.vercel.app',
     github: 'https://github.com/eosantos/event-platform',
     type: 'study',
-    coverColor: '#1a1a2e'
-    // coverImage: '/images/projects/event-platform.jpg',
+    coverColor: '#1a1a2e',
+    coverImage:
+      'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80'
   },
   {
     id: 'project5',
@@ -770,8 +784,9 @@ const allProjects: AllProject[] = [
     link: 'https://ecommerce-reactjs-app.vercel.app',
     github: 'https://github.com/eosantos/ecommerce-reactjs-app',
     type: 'training',
-    coverColor: '#16213e'
-    // coverImage: '/images/projects/ecommerce.jpg',
+    coverColor: '#16213e',
+    coverImage:
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80'
   }
 ];
 
@@ -859,16 +874,10 @@ function AllProjectCard({
             ))}
           </CardTechStack>
           {hasLinks && (
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '0.5rem',
-                marginTop: '0.5rem'
-              }}
-            >
+            <CardActions>
               {project.link && (
-                <ActionButton
+                <CardActionButton
+                  as="a"
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -876,10 +885,11 @@ function AllProjectCard({
                 >
                   <FaExternalLinkAlt aria-hidden="true" size={14} />
                   {t('projects.viewProject')}
-                </ActionButton>
+                </CardActionButton>
               )}
               {project.github && (
-                <ActionButton
+                <CardActionButton
+                  as="a"
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -887,14 +897,16 @@ function AllProjectCard({
                 >
                   <FaGithub aria-hidden="true" size={14} />
                   {t('projects.viewRepo')}
-                </ActionButton>
+                </CardActionButton>
               )}
-            </div>
+            </CardActions>
           )}
           {!hasLinks && (
-            <ActionButtonSecondary style={{ marginTop: '0.5rem' }}>
-              {t('projects.internalProject')}
-            </ActionButtonSecondary>
+            <CardActions>
+              <ActionButtonSecondary>
+                {t('projects.internalProject')}
+              </ActionButtonSecondary>
+            </CardActions>
           )}
         </CardContent>
       </ProjectCard>
@@ -912,6 +924,7 @@ function ProjectModal({
   t: (key: string) => string;
 }) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
   const isMounted = useRef(false);
 
@@ -955,6 +968,13 @@ function ProjectModal({
     };
   }, [project, onClose]);
 
+  // Reset scroll position when project changes
+  useEffect(() => {
+    if (scrollAreaRef.current) {
+      scrollAreaRef.current.scrollTop = 0;
+    }
+  }, [project]);
+
   if (!project) return null;
 
   return (
@@ -976,14 +996,14 @@ function ProjectModal({
           </ModalLeftColumn>
           <ModalRightColumn>
             <ModalContent>
-              <ModalHeader>
-                <ModalTitle id="modal-title">{t(project.name)}</ModalTitle>
-                <ModalPeriod>
-                  {t('projects.period')}: {t(project.period)}
-                </ModalPeriod>
-                <ModalType>{t('projects.internalProject')}</ModalType>
-              </ModalHeader>
-              <ModalScrollArea>
+              <ModalScrollArea ref={scrollAreaRef}>
+                <ModalHeader>
+                  <ModalTitle id="modal-title">{t(project.name)}</ModalTitle>
+                  <ModalPeriod>
+                    {t('projects.period')}: {t(project.period)}
+                  </ModalPeriod>
+                  <ModalType>{t('projects.internalProject')}</ModalType>
+                </ModalHeader>
                 <ModalDescription>{t(project.fullDesc)}</ModalDescription>
                 <ModalHighlights>
                   <ModalHighlightsTitle>

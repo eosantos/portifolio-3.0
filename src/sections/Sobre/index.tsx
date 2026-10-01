@@ -53,6 +53,7 @@ const Grid = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
+  min-width: 250px;
 
   ${media.greaterThan('lg')} {
     flex-direction: row;
@@ -64,7 +65,7 @@ const Grid = styled.div`
 const Photo = styled.div`
   flex-shrink: 0;
   width: 100%;
-  max-width: 330px;
+  width: 250px;
   aspect-ratio: 1 / 1;
   border-radius: 12px;
   overflow: hidden;

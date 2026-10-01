@@ -87,7 +87,7 @@ const ProjectCard = styled.article`
     transform 0.2s ease,
     box-shadow 0.2s ease,
     border-color 0.2s ease;
-  max-height: 490px;
+  max-height: 530px;
 
   &:hover {
     transform: translateY(-4px);
@@ -101,7 +101,10 @@ const ProjectCard = styled.article`
   }
 `;
 
-const CardCover = styled.div<{ $bgColor?: string }>`
+const CardCover = styled.div<{
+  $bgColor?: string;
+  $coverImage?: string;
+}>`
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -110,7 +113,29 @@ const CardCover = styled.div<{ $bgColor?: string }>`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  max-height: 210px;
+  min-height: 230px;
+
+  ${({ $coverImage }) =>
+    $coverImage &&
+    `
+      background-image: url(${$coverImage});
+      background-size: cover;
+      background-position: top;
+      background-repeat: no-repeat;
+    `}
+
+  /* Overlay sobre a imagem */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.65) 100%
+    );
+    z-index: 1;
+  }
 
   &::before {
     content: '';
@@ -119,6 +144,7 @@ const CardCover = styled.div<{ $bgColor?: string }>`
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     opacity: 0.03;
     pointer-events: none;
+    z-index: 2;
   }
 `;
 
@@ -131,7 +157,8 @@ const CoverTitle = styled.span`
   padding: 1rem;
   line-height: 1.2;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
 const CardContent = styled.div`
@@ -707,8 +734,7 @@ const featuredProjects: FeaturedProject[] = [
       'React Hooks'
     ],
     coverColor: '#1a1a2e',
-    coverImage:
-      'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80'
+    coverImage: '/assets/MockupTelasMagalu.png'
   },
   {
     id: 'featured2',
@@ -724,8 +750,7 @@ const featuredProjects: FeaturedProject[] = [
     ],
     technologies: ['Next.js', 'TypeScript', 'Styled Components', 'REST APIs'],
     coverColor: '#16213e',
-    coverImage:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80'
+    coverImage: '/assets/MockupTelasEqseed.png'
   },
   {
     id: 'featured3',
@@ -822,7 +847,10 @@ function FeaturedCard({
   return (
     <Reveal key={project.id} delay={index * 80} y={16}>
       <ProjectCard>
-        <CardCover $bgColor={project.coverColor}>
+        <CardCover
+          $bgColor={project.coverColor}
+          $coverImage={project.coverImage}
+        >
           <CoverTitle>{t(project.name)}</CoverTitle>
         </CardCover>
         <CardContent>
@@ -868,7 +896,10 @@ function AllProjectCard({
   return (
     <Reveal key={project.id} delay={index * 60} y={12}>
       <ProjectCard>
-        <CardCover $bgColor={project.coverColor}>
+        <CardCover
+          $bgColor={project.coverColor}
+          $coverImage={project.coverImage}
+        >
           <CoverTitle>{t(project.name)}</CoverTitle>
         </CardCover>
         <CardContent>

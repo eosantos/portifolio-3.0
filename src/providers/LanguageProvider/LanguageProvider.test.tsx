@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { LanguageProvider, useLanguage } from './LanguageProvider';
+import { LanguageProvider, useLanguage } from '../LanguageProvider';
 
 // Test component to consume the language context
 const TestComponent = () => {

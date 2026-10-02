@@ -51,7 +51,6 @@ const SubSectionTitle = styled.h3`
   font-weight: 600;
   letter-spacing: 0.02em;
   color: ${({ theme }) => theme.text};
-  margin: 0 0 1.5rem;
 
   ${media.greaterThan('md')} {
     font-size: 1.5rem;
@@ -488,6 +487,7 @@ const ModalTitle = styled.h2`
   color: ${({ theme }) => theme.text};
   margin: 0;
   line-height: 1.2;
+  margin-top: 25px;
 
   ${media.greaterThan('md')} {
     flex: 1;
@@ -709,7 +709,7 @@ interface AllProject {
   technologies: string[];
   link?: string;
   github?: string;
-  type: 'internal' | 'study' | 'training';
+  type: 'internal' | 'study' | 'training' | 'technicalChallenge';
   coverColor?: string;
   coverImage?: string;
 }
@@ -734,7 +734,7 @@ const featuredProjects: FeaturedProject[] = [
       'React Hooks'
     ],
     coverColor: '#1a1a2e',
-    coverImage: '/assets/MockupTelasMagalu.png'
+    coverImage: '/assets/mockups/mockupMagalu.jpeg'
   },
   {
     id: 'featured2',
@@ -750,7 +750,7 @@ const featuredProjects: FeaturedProject[] = [
     ],
     technologies: ['Next.js', 'TypeScript', 'Styled Components', 'REST APIs'],
     coverColor: '#16213e',
-    coverImage: '/assets/MockupTelasEqseed.png'
+    coverImage: '/assets/mockups/mockupEqseed.jpeg'
   },
   {
     id: 'featured3',
@@ -766,8 +766,7 @@ const featuredProjects: FeaturedProject[] = [
     ],
     technologies: ['React', 'TypeScript', 'VTEX IO', 'Sass'],
     coverColor: '#0f0f23',
-    coverImage:
-      'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80'
+    coverImage: '/assets/mockups/mockupSamsung.jpeg'
   }
 ];
 
@@ -784,8 +783,7 @@ const allProjects: AllProject[] = [
     ],
     type: 'internal',
     coverColor: '#1a1a2e',
-    coverImage:
-      'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80'
+    coverImage: '/assets/mockups/mockupMagalu.jpeg'
   },
   {
     id: 'featured2',
@@ -794,8 +792,7 @@ const allProjects: AllProject[] = [
     technologies: ['Next.js', 'TypeScript', 'Styled Components', 'REST APIs'],
     type: 'internal',
     coverColor: '#16213e',
-    coverImage:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80'
+    coverImage: '/assets/mockups/mockupEqseed.jpeg'
   },
   {
     id: 'featured3',
@@ -804,8 +801,7 @@ const allProjects: AllProject[] = [
     technologies: ['React', 'TypeScript', 'VTEX IO', 'Sass'],
     type: 'internal',
     coverColor: '#0f0f23',
-    coverImage:
-      'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80'
+    coverImage: '/assets/mockups/mockupSamsung.jpeg'
   },
   {
     id: 'project4',
@@ -816,20 +812,51 @@ const allProjects: AllProject[] = [
     github: 'https://github.com/eosantos/event-platform',
     type: 'study',
     coverColor: '#1a1a2e',
-    coverImage:
-      'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80'
+    coverImage: '/assets/mockups/mockupAdobe.jpeg'
   },
   {
     id: 'project5',
     name: 'projects.project5.name',
     shortDesc: 'projects.project5.shortDesc',
-    technologies: ['React', 'TypeScript', 'Next.js', 'Material UI'],
-    link: 'https://ecommerce-reactjs-app.vercel.app',
-    github: 'https://github.com/eosantos/ecommerce-reactjs-app',
-    type: 'training',
+    technologies: ['React', 'Next.js', 'TypeScript'],
+    link: '',
+    github: 'https://github.com/eosantos/grao-food_v2',
+    type: 'technicalChallenge',
+    coverColor: '#5a3525',
+    coverImage: '/assets/mockups/mockupFood.jpeg'
+  },
+  {
+    id: 'project6',
+    name: 'projects.project6.name',
+    shortDesc: 'projects.project6.shortDesc',
+    technologies: ['React', 'Next.js', 'TypeScript', 'REST API'],
+    link: '',
+    github: 'https://github.com/eosantos/desenvolvedor-cadastra',
+    type: 'technicalChallenge',
     coverColor: '#16213e',
-    coverImage:
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80'
+    coverImage: '/assets/mockups/mockupCadastra.jpeg'
+  },
+  {
+    id: 'project7',
+    name: 'projects.project7.name',
+    shortDesc: 'projects.project7.shortDesc',
+    technologies: ['React', 'Next.js', 'TypeScript', 'REST API'],
+    link: '',
+    github: 'https://github.com/eosantos/clima-tempo',
+    type: 'technicalChallenge',
+    coverColor: '#1b4965',
+    coverImage: '/assets/mockups/mockupClimaTempo.jpeg'
+  },
+  {
+    id: 'project8',
+    name: 'projects.project8.name',
+    shortDesc: 'projects.project8.shortDesc',
+    technologies: ['TypeScript', 'Vite', 'TailwindCSS', 'GraphQL'],
+    link: 'https://event-platform-eosantos.vercel.app',
+    github: 'https://github.com/eosantos/event-platform',
+    type: 'technicalChallenge',
+    coverColor: '#1a1a2e',
+    coverImage: '/assets/mockups/muckupEcommerce.jpeg'
   }
 ];
 
@@ -912,6 +939,9 @@ function AllProjectCard({
             )}
             {project.type === 'internal' && (
               <CardType>{t('projects.internalProject')}</CardType>
+            )}
+            {project.type === 'technicalChallenge' && (
+              <CardType>{t('projects.technicalChallenge')}</CardType>
             )}
           </CardMeta>
           <CardDescription>{t(project.shortDesc)}</CardDescription>

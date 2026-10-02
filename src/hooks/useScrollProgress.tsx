@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  useEffect,
-  useState,
-  createContext,
-  useContext,
-  ReactNode
-} from 'react';
+import { useEffect, useState, createContext, ReactNode } from 'react';
 import { useScroll, useTransform, MotionValue } from 'framer-motion';
 
 interface ScrollProgressContextValue {
@@ -73,14 +67,4 @@ export function ScrollProgressProvider({ children }: { children: ReactNode }) {
       {children}
     </ScrollProgressContext.Provider>
   );
-}
-
-export function useScrollProgress() {
-  const context = useContext(ScrollProgressContext);
-  if (!context) {
-    throw new Error(
-      'useScrollProgress must be used within ScrollProgressProvider'
-    );
-  }
-  return context;
 }

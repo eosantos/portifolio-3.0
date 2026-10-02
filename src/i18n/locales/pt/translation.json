@@ -50,6 +50,7 @@
     "internalProject": "Projeto interno",
     "studyProject": "Projeto de estudo",
     "trainingProject": "Projeto de treinamento",
+    "technicalChallenge": "Desafio Técnico",
     "featured1": {
       "name": "Cartão Magalu / SuperApp Magalu — Luizalabs",
       "shortDesc": "Integração do Cartão Magalu ao SuperApp, eliminando a necessidade de sair do app para consultar fatura.",
@@ -90,7 +91,7 @@
       "technologies": ["React", "TypeScript", "VTEX IO", "Sass"]
     },
     "project4": {
-      "name": "event-platform",
+      "name": "Plataforma de Eventos",
       "shortDesc": "Plataforma de eventos — projeto pessoal de estudo.",
       "technologies": ["TypeScript", "Vite", "TailwindCSS", "GraphQL"],
       "link": "https://event-platform-eosantos.vercel.app",
@@ -98,14 +99,38 @@
       "type": "study"
     },
     "project5": {
-      "name": "ecommerce-reactjs-app",
-      "shortDesc": "E-commerce — projeto de treinamento com React, Next.js e TypeScript.",
+      "name": "Grão Food",
+      "shortDesc": "Grão Food — projeto web desenvolvido para explorar soluções de interface e aprimorar habilidades em desenvolvimento frontend no segmento de alimentação.",
+      "technologies": ["React", "Next.js", "TypeScript"],
+      "link": "",
+      "github": "https://github.com/eosantos/grao-food_v2",
+      "type": "technicalChallenge"
+    },
+    "project6": {
+      "name": "Cadastra",
+      "shortDesc": "E-commerce desenvolvido como desafio técnico, com catálogo de produtos, filtros por cor, tamanho e preço.",
+      "technologies": ["React", "Next.js", "TypeScript", "REST API"],
+      "link": "",
+      "github": "https://github.com/eosantos/desenvolvedor-cadastra",
+      "type": "technicalChallenge"
+    },
+    "project7": {
+      "name": "Clima Tempo",
+      "shortDesc": "Aplicação de previsão meteorológica que consulta APIs de clima e apresenta informações dos próximos sete dias.",
+      "technologies": ["React", "Next.js", "TypeScript", "REST API"],
+      "link": "",
+      "github": "https://github.com/eosantos/clima-tempo",
+      "type": "technicalChallenge"
+    },
+    "project8": {
+      "name": "E-commerce",
+      "shortDesc": "E-commerce — desafio técnico desenvolvido com React, Next.js e TypeScript.",
       "technologies": ["React", "TypeScript", "Next.js", "Material UI"],
       "link": "https://ecommerce-reactjs-app.vercel.app",
       "github": "https://github.com/eosantos/ecommerce-reactjs-app",
-      "type": "training"
+      "type": "technicalChallenge"
     }
-  },
+},
   "contact": {
     "title": "entre em contato",
     "subtitle": "Estou sempre aberto a novas oportunidades e conversas interessantes. Sinta-se à vontade para me chamar!",

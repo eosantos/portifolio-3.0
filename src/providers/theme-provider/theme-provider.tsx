@@ -2,8 +2,8 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ThemeProvider as StyledProvider } from 'styled-components';
-import { GlobalStyle } from '../styles/global';
-import { darkTheme, lightTheme } from '../styles/theme';
+import { GlobalStyle } from '../../styles/global';
+import { darkTheme, lightTheme } from '../../styles/theme';
 
 type ThemeContextType = {
   toggleTheme: () => void;

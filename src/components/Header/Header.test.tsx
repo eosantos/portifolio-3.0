@@ -2,7 +2,7 @@ import { render, screen, fireEvent, act } from '@testing-library/react';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { LanguageProvider } from '@/providers/LanguageProvider';
 import { scrollToSection } from '@/utils/scrollToSection';
-import Header from '../Header';
+import Header from './Header';
 
 vi.mock('@/utils/scrollToSection', () => ({
   scrollToSection: vi.fn()

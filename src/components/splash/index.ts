@@ -1,3 +1,2 @@
-export { default as FadeWrapper } from '@/components/splash/FadeWrapper';
-
-export { default as SplashWrapper } from '@/components/splash/SplashWrapper';
+export { default as FadeWrapper } from './FadeWrapper';
+export { default as SplashWrapper } from './SplashWrapper';

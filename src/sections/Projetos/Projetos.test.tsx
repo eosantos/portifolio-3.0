@@ -126,28 +126,32 @@ describe('ProjetosSection', () => {
     expect(screen.getByText('projects.studyProject')).toBeInTheDocument();
   });
 
-  it('shows training project badge for ecommerce-reactjs-app', () => {
+  it('shows technical challenge badge for technical challenge projects', () => {
     renderWithProviders(<Projetos />);
-    expect(screen.getByText('projects.trainingProject')).toBeInTheDocument();
+    const badges = screen.getAllByText('projects.technicalChallenge');
+    // 4 projects have type 'technicalChallenge': project5, project6, project7, project8
+    expect(badges.length).toBe(4);
   });
 
   it('has view project and view repo links for personal projects', () => {
     renderWithProviders(<Projetos />);
     const viewProjectLinks = screen.getAllByText('projects.viewProject');
     const viewRepoLinks = screen.getAllByText('projects.viewRepo');
-    // Should have links for the 2 personal projects
+    // 2 personal projects (project4, project8) have viewProject links
+    // 5 allProjects have viewRepo links (all have github)
     expect(viewProjectLinks.length).toBe(2);
-    expect(viewRepoLinks.length).toBe(2);
+    expect(viewRepoLinks.length).toBe(5);
   });
 
   it('does not have external links for internal projects', () => {
     renderWithProviders(<Projetos />);
-    // Internal projects should not have viewProject/viewRepo links
+    // Internal projects (featured1, featured2, featured3 in allProjects) should not have viewProject/viewRepo links
     const viewProjectLinks = screen.getAllByText('projects.viewProject');
     const viewRepoLinks = screen.getAllByText('projects.viewRepo');
-    // Only 2 personal projects should have these links
+    // Only project4 and project8 have viewProject links (2 total)
+    // All 5 allProjects have viewRepo links via github
     expect(viewProjectLinks.length).toBe(2);
-    expect(viewRepoLinks.length).toBe(2);
+    expect(viewRepoLinks.length).toBe(5);
   });
 
   it('opens modal when view more is clicked on featured card', () => {

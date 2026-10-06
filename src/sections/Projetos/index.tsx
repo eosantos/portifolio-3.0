@@ -852,8 +852,8 @@ const allProjects: AllProject[] = [
     name: 'projects.project8.name',
     shortDesc: 'projects.project8.shortDesc',
     technologies: ['TypeScript', 'Vite', 'TailwindCSS', 'GraphQL'],
-    link: 'https://event-platform-eosantos.vercel.app',
-    github: 'https://github.com/eosantos/event-platform',
+    link: 'https://ecommerce-reactjs-app.vercel.app/',
+    github: 'https://github.com/eosantos/ecommerce-reactjs-app',
     type: 'technicalChallenge',
     coverColor: '#1a1a2e',
     coverImage: '/assets/mockups/muckupEcommerce.jpeg'

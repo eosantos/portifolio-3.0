@@ -14,7 +14,7 @@
 import { fireEvent, render, act } from '@testing-library/react';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { LanguageProvider } from '@/providers/LanguageProvider';
-import Header from '../Header';
+import Header from './Header';
 
 vi.unmock('framer-motion');
 

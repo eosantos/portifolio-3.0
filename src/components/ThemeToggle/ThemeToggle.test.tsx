@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { ThemeProvider } from '@/providers/theme-provider';
-import { ThemeToggle } from '../ThemeToggle';
+import { ThemeToggle } from './ThemeToggle';
 
 const renderWithProvider = (component: React.ReactNode) => {
   return render(<ThemeProvider>{component}</ThemeProvider>);

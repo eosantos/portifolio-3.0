@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { ThemeProvider, useTheme } from '../theme-provider';
+import { ThemeProvider, useTheme } from './ThemeProvider';
 
 // Test component to consume the theme context
 const TestComponent = () => {

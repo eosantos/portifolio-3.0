@@ -1,5 +1,5 @@
 import { render, screen, act } from '@testing-library/react';
-import { ThemeProvider } from '@/providers/theme-provider';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 import SplashScreen from '@/components/splash/SplashScreen';
 
 const renderWithProvider = (component: React.ReactNode) => {

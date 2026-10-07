@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { ThemeProvider } from '@/providers/theme-provider';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 import { ThemeToggle } from './ThemeToggle';
 
 const renderWithProvider = (component: React.ReactNode) => {

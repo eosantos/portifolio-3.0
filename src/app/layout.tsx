@@ -2,7 +2,7 @@ import { FadeWrapper, SplashWrapper } from '@/components/splash';
 import PageTransition from '@/components/transition/PageTransition';
 import '@/i18n';
 import { LanguageProvider } from '@/providers/LanguageProvider';
-import { ThemeProvider } from '@/providers/theme-provider';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 import type { Metadata } from 'next';
 import { Catamaran } from 'next/font/google';
 import Script from 'next/script';

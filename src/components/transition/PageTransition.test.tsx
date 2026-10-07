@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { ThemeProvider } from '@/providers/theme-provider';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 import PageTransition from './PageTransition';
 
 const renderWithProvider = (component: React.ReactNode) => {

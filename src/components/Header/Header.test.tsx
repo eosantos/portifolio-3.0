@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { ThemeProvider } from '@/providers/theme-provider';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 import { LanguageProvider } from '@/providers/LanguageProvider';
 import { scrollToSection } from '@/utils/scrollToSection';
 import Header from './Header';

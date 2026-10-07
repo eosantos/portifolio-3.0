@@ -1,4 +1,4 @@
-import { useTheme } from '@/providers/theme-provider';
+import { useTheme } from '@/providers/ThemeProvider';
 import styled from 'styled-components';
 
 const Track = styled.button`

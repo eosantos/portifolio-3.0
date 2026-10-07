@@ -1,7 +1,7 @@
 'use client';
 
 import { useHasMounted } from '@/hooks/useHasMounted';
-import { useTheme } from '@/providers/theme-provider';
+import { useTheme } from '@/providers/ThemeProvider';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';

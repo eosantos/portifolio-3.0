@@ -12,7 +12,7 @@
  * window.scrollY, so scroll position is set on the element.
  */
 import { fireEvent, render, act } from '@testing-library/react';
-import { ThemeProvider } from '@/providers/theme-provider';
+import { ThemeProvider } from '@/providers/ThemeProvider';
 import { LanguageProvider } from '@/providers/LanguageProvider';
 import Header from './Header';
 

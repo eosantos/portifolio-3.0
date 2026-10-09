@@ -134,6 +134,9 @@
   "contact": {
     "title": "get in touch",
     "subtitle": "I'm always open to new opportunities and interesting conversations. Feel free to reach out!",
+    "headline": "Let's build something together?",
+    "body": "I'm open to new opportunities and conversations about web and mobile products. Tell me a bit about the challenge — I'll get back to you as soon as possible.",
+    "availabilityBadge": "Open to new opportunities",
     "fields": {
       "name": "Name",
       "email": "Email",
@@ -144,11 +147,24 @@
       "email": "your@email.com",
       "message": "Your message..."
     },
-    "send": "Send",
+    "send": "Send message",
     "sending": "Sending...",
     "reset": "Clear",
-    "success": "Message sent successfully! I'll get back to you soon.",
-    "error": "Failed to send message. Please try again or send an email directly."
+    "success": "Message sent! Thanks for reaching out.",
+    "error": "Could not send right now. Please try again or write directly to the email on the side.",
+    "validation": {
+      "nameRequired": "Name is required",
+      "nameMinLength": "Name must be at least 2 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email",
+      "messageRequired": "Message is required",
+      "messageMinLength": "Message must be at least 10 characters"
+    },
+    "cv": {
+      "download": "Download résumé (PDF)",
+      "downloadPt": "Download résumé (PDF, Portuguese)",
+      "downloadEn": "Download résumé (PDF)"
+    }
   },
   "manifesto": {
     "label": "Manifesto",

@@ -134,6 +134,9 @@
   "contact": {
     "title": "entre em contato",
     "subtitle": "Estou sempre aberto a novas oportunidades e conversas interessantes. Sinta-se à vontade para me chamar!",
+    "headline": "Vamos construir algo juntos?",
+    "body": "Estou aberto a novas oportunidades e a conversas sobre produtos web e mobile. Conte um pouco sobre o desafio — respondo assim que possível.",
+    "availabilityBadge": "Disponível para novas oportunidades",
     "fields": {
       "name": "Nome",
       "email": "E-mail",
@@ -144,11 +147,24 @@
       "email": "seu@email.com",
       "message": "Sua mensagem..."
     },
-    "send": "Enviar",
+    "send": "Enviar mensagem",
     "sending": "Enviando...",
     "reset": "Limpar",
-    "success": "Mensagem enviada com sucesso! Entrarei em contato em breve.",
-    "error": "Erro ao enviar mensagem. Tente novamente ou envie um e-mail diretamente."
+    "success": "Mensagem enviada! Obrigado pelo contato.",
+    "error": "Não foi possível enviar agora. Tente novamente ou escreva direto para o e-mail ao lado.",
+    "validation": {
+      "nameRequired": "Nome é obrigatório",
+      "nameMinLength": "Nome deve ter pelo menos 2 caracteres",
+      "emailRequired": "E-mail é obrigatório",
+      "emailInvalid": "E-mail inválido",
+      "messageRequired": "Mensagem é obrigatória",
+      "messageMinLength": "Mensagem deve ter pelo menos 10 caracteres"
+    },
+    "cv": {
+      "download": "Baixar currículo (PDF)",
+      "downloadPt": "Baixar currículo (PDF, Português)",
+      "downloadEn": "Download résumé (PDF, Portuguese)"
+    }
   },
   "manifesto": {
     "label": "Manifesto",

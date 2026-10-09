@@ -140,6 +140,9 @@ vi.mock('react-icons/fi', () => ({
   ),
   FiSend: ({ 'data-testid': testid = 'send-icon' }) => (
     <svg data-testid={testid} />
+  ),
+  FiDownload: ({ 'data-testid': testid = 'download-icon' }) => (
+    <svg data-testid={testid} />
   )
 }));
 

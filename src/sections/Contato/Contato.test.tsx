@@ -449,7 +449,7 @@ describe('ContatoSection', () => {
     const cvButton = screen.getByRole('link', {
       name: 'contact.cv.downloadPt'
     });
-    expect(cvButton).toHaveAttribute('href', '/Eduardo-Oliveira-CV.pdf');
+    expect(cvButton).toHaveAttribute('href', '/Curriculo-Eduardo-Oliveira.pdf');
     expect(cvButton).toHaveAttribute('download');
   });
 

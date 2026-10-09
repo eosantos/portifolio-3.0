@@ -146,7 +146,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       disabled,
       children,
       style,
-      ...props
+      ...restProps
     },
     ref
   ) => {
@@ -163,7 +163,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={loading}
         aria-disabled={isDisabled}
         style={style}
-        {...props}
+        {...restProps}
       >
         {loading && <LoadingSpinner aria-hidden="true" />}
         {children}

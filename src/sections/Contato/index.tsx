@@ -121,9 +121,57 @@ const ContactLinks = styled.div`
   margin-top: 0.5rem;
 `;
 
-const CVDownloadButton = styled(Button)`
+const CVDownloadButton = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border: 1px solid ${({ theme }) => theme.purple};
+  border-radius: 999px;
+  background: ${({ theme }) => theme.purple};
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    background: transparent;
+    color: ${({ theme }) => theme.purple};
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px ${({ theme }) => theme.purple}33;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.purple};
+    outline-offset: 3px;
+  }
+
+  svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover svg {
+    transform: translateY(2px);
+  }
+
   ${media.lessThan('sm')} {
     width: 100%;
+    justify-content: center;
   }
 `;
 
@@ -400,8 +448,6 @@ export default function ContatoSection() {
                 </ContactLinks>
 
                 <CVDownloadButton
-                  variant="secondary"
-                  as="a"
                   href={cvPtFile}
                   download
                   target="_blank"
@@ -541,8 +587,6 @@ export default function ContatoSection() {
                 </ContactLinks>
 
                 <CVDownloadButton
-                  variant="secondary"
-                  as="a"
                   href={cvPtFile}
                   download
                   target="_blank"
